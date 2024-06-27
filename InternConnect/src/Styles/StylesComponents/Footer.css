@@ -1,0 +1,91 @@
+.rectangle {
+    position: relative;
+    width: 1440px;
+    height: 140px;
+    margin: 1px 0 0 0;
+    background: #4d2d18;
+    border: 1px solid #000000;
+    z-index: 23;
+  }
+  
+  .regroup {
+    position: absolute;
+    width: 49.58%;
+    height: 100%;
+    top: -0.71%;
+    left: 4.65%;
+    z-index: 22;
+  }
+  
+  .preguntas-frecuentes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    height: 14.29%;
+    top: 40%;
+    left: 74.51%;
+    color: #ffffff;
+    font-family: Inter, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 22;
+  }
+  
+  .sobre-nosotros {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    height: 14.29%;
+    top: 42.86%;
+    left: 0;
+    color: #ffffff;
+    font-family: Inter, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 20;
+  }
+  
+  .text-9 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    height: 14.29%;
+    top: 42.86%;
+    left: 25.49%;
+    color: #ffffff;
+    font-family: Inter, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 21;
+  }
+  
+  .text-a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    height: 25%;
+    top: 33.57%;
+    left: 58.47%;
+    color: #ffffff;
+    font-family: Inter, var(--default-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 23;
+  }
+  

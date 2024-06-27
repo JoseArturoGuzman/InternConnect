@@ -1,0 +1,86 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 50px; /* 25px vertical (top and bottom), 50px horizontal (left and right) */
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+}
+
+.logo-text {
+  font-size: 20px;
+  color: #4D2D18;
+  text-align: center;
+  margin-top: 5px; /* Espacio entre el logo y el texto */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* Empuja los enlaces de navegación a la derecha */
+  align-items: center; /* Alinea verticalmente los enlaces de navegación */
+}
+
+.nav-links li {
+  margin-right: 25px;
+  font-size: 28px;
+  position: relative; /* Necesario para el dropdown */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #4D2D18;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.profile-icon {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+/* Estilo del dropdown */
+.dropdown-menu {
+  display: none; /* Ocultar por defecto */
+  position: absolute;
+  top: 100%; /* Coloca el menú directamente debajo del elemento principal */
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #4D2D18;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Mostrar el dropdown al hacer hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
