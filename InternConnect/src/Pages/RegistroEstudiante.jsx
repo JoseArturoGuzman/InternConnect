@@ -1,6 +1,8 @@
+// RegistroEstudiante.js
 import React, { useState } from 'react';
+import '../Styles/StylesPages/RegistroEstudiante.css';
 
-export function RegistroEstudiante(){
+export function RegistroEstudiante() {
   const [nombre, setNombre] = useState('');
   const [institucion, setInstitucion] = useState('');
   const [correo, setCorreo] = useState('');
@@ -18,54 +20,59 @@ export function RegistroEstudiante(){
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Regístrate</h2>
-      <div>
+    <form onSubmit={handleSubmit} className="registro-form">
+      <h2 className="form-title">Regístrate</h2>
+      <div className="form-group">
         <label htmlFor="nombre">Nombre:</label>
         <input
           type="text"
           id="nombre"
           value={nombre}
           onChange={(event) => setNombre(event.target.value)}
+          required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="institucion">Institución:</label>
         <input
           type="text"
           id="institucion"
           value={institucion}
           onChange={(event) => setInstitucion(event.target.value)}
+          required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="correo">Correo:</label>
         <input
           type="email"
           id="correo"
           value={correo}
           onChange={(event) => setCorreo(event.target.value)}
+          required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="contraseña">Contraseña:</label>
         <input
           type="password"
           id="contraseña"
           value={contraseña}
           onChange={(event) => setContraseña(event.target.value)}
+          required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="confirmarContraseña">Confirmar contraseña:</label>
         <input
           type="password"
           id="confirmarContraseña"
           value={confirmarContraseña}
           onChange={(event) => setConfirmarContraseña(event.target.value)}
+          required
         />
       </div>
-      <button type="submit">Registrar</button>
+      <button type="submit" className="submit-button">Registrar</button>
     </form>
   );
-};
+}

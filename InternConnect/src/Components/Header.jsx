@@ -9,7 +9,9 @@ export function Header() {
     <header>
       <nav className="navbar">
         <div className="logo-container">
+          <Link to="/">
           <img src={Logo} alt="InternConnect Logo" className="logo" />
+          </Link>
           <p className="logo-text">InternConnect</p>
         </div>
         <ul className="nav-links">

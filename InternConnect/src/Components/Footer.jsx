@@ -8,6 +8,7 @@ export function Footer() {
           <img src={Logo} alt="InternConnect Logo" className="logo" />
       
       <div className='regroup'>
+        
         <a href='#' className='preguntas-frecuentes'>Preguntas Frecuentes</a>
 
         <a href='mailto:pasantias@gmail.com' className='text-9'>Contactanos: Pasantías@gmail.com</a>

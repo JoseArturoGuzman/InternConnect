@@ -11,7 +11,9 @@ export function Landing() {
       <div className="background-container">
         <img src={BackgroundImage} alt="Background" className="background-image" />
         <div className="overlay">
-          <h1 className="overlay-text">Bienvenido a InternConnect</h1>
+          <h1 className="overlay-text">Potencia tu talento con las 
+          mejores oportunidades de pasantia!
+          </h1>
         </div>
       </div>
       <Footer />

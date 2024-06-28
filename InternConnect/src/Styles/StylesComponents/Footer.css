@@ -1,31 +1,35 @@
 /* Footer.css */
-
-.footer-container {
-  background-color: #111; /* Color de fondo oscuro similar a Netflix */
+.rectangle {
+  background-color:#4D2D18; /* Fondo oscuro similar a Netflix */
   color: #fff; /* Color del texto */
-  padding: 20px 0; /* Espaciado interior */
+  padding: 20px; /* Espaciado interior */
   text-align: center; /* Centrado del contenido */
-  position: absolute; /* Coloca el footer al final de la página */
-  bottom: 0; /* Fija el footer en la parte inferior */
   width: 100%; /* Ocupa toda la anchura disponible */
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
 }
 
-.footer-links {
+.logo {
+  max-width: 150px; /* Ancho máximo del logo */
+  margin-bottom: 10px; /* Espaciado inferior del logo */
+}
+
+.regroup {
   margin-bottom: 10px; /* Espaciado inferior entre los enlaces y el texto de copyright */
 }
 
-.footer-link {
-  margin-right: 20px; /* Espaciado entre los enlaces */
-  color: #757575; /* Color de los enlaces */
+.preguntas-frecuentes, .text-9 {
+  display: block; /* Los enlaces se muestran en bloque */
+  margin: 5px 0; /* Espaciado entre los enlaces */
+  color:#ffff; /* Color de los enlaces */
   text-decoration: none; /* Quita el subrayado */
   font-size: 14px; /* Tamaño de fuente */
 }
 
-.footer-link:hover {
-  color: #fff; /* Cambia el color al pasar el ratón por encima */
+.preguntas-frecuentes:hover, .text-9:hover {
+  color: #ffff; /* Cambia el color al pasar el ratón por encima */
 }
 
-.footer-text-content {
+.text-a {
   font-size: 12px; /* Tamaño de fuente del texto de copyright */
+  margin-top: 10px; /* Espaciado superior del texto de copyright */
 }
-

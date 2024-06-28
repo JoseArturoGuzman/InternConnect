@@ -7,11 +7,10 @@ import {Landing} from "./Pages/Landing.jsx"
 import { SobreNosotros } from './Pages/SobreNosotros.jsx'
 import { Login } from './Pages/Login.jsx'
 import {EleccionRol} from "./Pages/EleccionRol.jsx"
-import { RegistroEstudiante } from './Pages/RegistroEstudiante.jsx';
-import { RegistroEmpresa } from './Pages/RegistroEmpresa.jsx';
+import { Registro } from './Pages/Registro.jsx';
 import {ConsultarPasantias} from './Pages/ConsultarPasantias.jsx'
 import {ConsultarEmpresas} from './Pages/ConsultarEmpresas.jsx'
-
+import { PreguntasFrecuentes } from './Pages/PreguntasFrecuentes.jsx';
 const router = createBrowserRouter([
 
 {
@@ -32,13 +31,10 @@ const router = createBrowserRouter([
   element:<SobreNosotros/>
 },
 {
-  path:"/RegistrateEstudiante",
-  element:<RegistroEstudiante/>
+  path:"/Registro",
+  element:<Registro/>
 },
-{
-  path:"/RegistrateEmpresa",
-  element:<RegistroEmpresa/>
-},
+
 {
   path:"/ConsultarPasantias",
   element:<ConsultarPasantias/>
@@ -47,6 +43,10 @@ const router = createBrowserRouter([
   path:"/ConsultarEmpresas",
   element:<ConsultarEmpresas/>
 },
+{
+  path:"/Preguntas",
+  element:<PreguntasFrecuentes/>
+}
 
 ]);
 import './index.css'

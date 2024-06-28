@@ -1,0 +1,45 @@
+.EleccionRol {
+  text-align: center;
+}
+
+.EleccionRol h1 {
+  margin-bottom: 20px;
+}
+
+.EleccionRol div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.EleccionRol div div {
+  width: 100%; /* ajusta el ancho según sea necesario */
+  margin: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.EleccionRol InternConnect {
+    width: 10px;
+    height: 10px;
+}
+.EleccionRol img {
+  width: 100%;
+/* ajusta el alto según sea necesario */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.EleccionRol button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.EleccionRol button:hover {
+  background-color: #3e8e41;
+}
