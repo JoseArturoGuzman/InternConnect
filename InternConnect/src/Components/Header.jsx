@@ -2,6 +2,7 @@ import React from 'react';
 import "../Styles/StylesComponents/Header.css"
 import Logo from "../Images/LogoInternConnect.png"
 import Profile from "../Images/user.png";
+import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
@@ -12,21 +13,25 @@ export function Header() {
           <p className="logo-text">InternConnect</p>
         </div>
         <ul className="nav-links">
+          <Link to="/SobreNosotros">
           <li><a href="#">Sobre nosotros</a></li>
+          </Link>
           <li className="dropdown">
             <a href="#">Pasantías</a>
             <ul className="dropdown-menu">
-              <li><a href="#"> Consultar pasantías</a></li>
+              <li><Link to="/ConsultarPasantias"> Consultar pasantías</Link></li>
             </ul>
           </li>
           <li className="dropdown">
             <a href="#">Empresas</a>
             <ul className="dropdown-menu">
-              <li><a href="#">Consultar Empresas</a></li>
+              <li><Link to="/ConsultarEmpresas">Consultar Empresas</Link></li>
             </ul>
           </li>
         </ul>
-        <img src={Profile} alt="Profile Icon" className="profile-icon" />
+        <Link to="/login">
+          <img src={Profile} alt="Profile Icon" className="profile-icon" />
+        </Link>
       </nav>
     </header>
   );
