@@ -1,35 +1,37 @@
-/* Footer.css */
+/* StylesComponents/Footer.css */
 .rectangle {
-  background-color:#4D2D18; /* Fondo oscuro similar a Netflix */
-  color: #fff; /* Color del texto */
-  padding: 20px; /* Espaciado interior */
-  text-align: center; /* Centrado del contenido */
-  width: 100%; /* Ocupa toda la anchura disponible */
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #4D2D18;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  bottom: 0;
 }
 
 .logo {
-  max-width: 150px; /* Ancho máximo del logo */
-  margin-bottom: 10px; /* Espaciado inferior del logo */
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .regroup {
-  margin-bottom: 10px; /* Espaciado inferior entre los enlaces y el texto de copyright */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.preguntas-frecuentes, .text-9 {
-  display: block; /* Los enlaces se muestran en bloque */
-  margin: 5px 0; /* Espaciado entre los enlaces */
-  color:#ffff; /* Color de los enlaces */
-  text-decoration: none; /* Quita el subrayado */
-  font-size: 14px; /* Tamaño de fuente */
-}
-
-.preguntas-frecuentes:hover, .text-9:hover {
-  color: #ffff; /* Cambia el color al pasar el ratón por encima */
+.preguntas-frecuentes,
+.text-9 {
+  color: white;
+  text-decoration: none;
+  margin: 5px 0;
 }
 
 .text-a {
-  font-size: 12px; /* Tamaño de fuente del texto de copyright */
-  margin-top: 10px; /* Espaciado superior del texto de copyright */
+  margin-top: 10px;
 }

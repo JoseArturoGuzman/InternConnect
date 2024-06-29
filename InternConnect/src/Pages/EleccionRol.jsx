@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Student from "../Images/UniStudent.png"
 import Company from "../Images/Company.png"
 
-import "../Styles/StylesPages/EleccionRol.css"
 export function EleccionRol (){
   return (
     <div className="EleccionRol">

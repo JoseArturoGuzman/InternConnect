@@ -10,13 +10,13 @@ export function Header() {
       <nav className="navbar">
         <div className="logo-container">
           <Link to="/">
-          <img src={Logo} alt="InternConnect Logo" className="logo" />
+            <img src={Logo} alt="InternConnect Logo" className="logo" />
           </Link>
           <p className="logo-text">InternConnect</p>
         </div>
         <ul className="nav-links">
           <Link to="/SobreNosotros">
-          <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
           </Link>
           <li className="dropdown">
             <a href="#">Pasantías</a>

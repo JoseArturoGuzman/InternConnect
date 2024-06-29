@@ -1,38 +1,55 @@
-.main-container {
-    position: relative;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    
-    
-  }
-  
-  .background-container {
-    position: relative;
-    width: 100%;
+/* Estilo para asegurar que el footer esté siempre en la parte inferior */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-    /* Ajusta la altura restando el padding superior */
-    overflow: hidden;
-  }
-  
-  .background-image {
-    width: 100vw;
-    min-height: 100%; /* Asegura que cubra al menos la altura del contenedor */
-    object-fit: cover;
-  }
-  
-  .overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    z-index: 1;
-  }
-  
-  .overlay-text {
-    font-size: 48px;
-    font-weight: bold;
-    
-  }
-  
+.main-content {
+  flex: 1;
+}
+
+.background-container {
+  position: relative;
+  width: 100%;
+}
+
+.background-image {
+  width: 100vw;
+  min-height: 100%; /* Asegura que cubra al menos la altura del contenedor */
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 10%; /* Ajusta el valor para mover el texto más cerca de la izquierda */
+  transform: translateY(-50%); /* Solo mueve el texto verticalmente al centro */
+  color: white;
+  z-index: 1;
+}
+
+.overlay-text {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.empresas-asociadas {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.empresa-imagen {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.empresa-imagen:hover {
+  transform: scale(1.1);
+}
