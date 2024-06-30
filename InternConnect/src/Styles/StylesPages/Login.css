@@ -1,71 +1,122 @@
 .Login-Sect {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .image-container {
-    width: 40%; /* ajusta el ancho según sea necesario */
-    margin-right: 20px;
-  }
-  
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .login-container {
-    width: 50%; /* ajusta el ancho según sea necesario */
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .logo img {
-    width: 50px; /* ajusta el ancho según sea necesario */
-    height: 50px; /* ajusta el ancho según sea necesario */
-    margin-right: 10px;
-  }
-  
-  .login-form {
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch; /* Cambiado a stretch para que la imagen ocupe toda la altura */
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.image-container {
+  flex: 1 1 50%;
+  max-width: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex; /* Asegura que el contenedor de la imagen use todo el espacio disponible */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-container {
+  flex: 1 1 50%;
+  max-width: 50%;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #FFF8F2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1.5em; /* Tamaño más grande para el texto del logo */
+}
+
+.logo img {
+  width: 60px; /* Tamaño más grande */
+  height: 60px; /* Tamaño más grande */
+  margin-right: 10px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px; /* Ancho más grande */
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 1.2em; /* Tamaño más grande para las etiquetas */
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 1.2em; /* Tamaño más grande para los campos de entrada */
+}
+
+.login-button {
+  width: 100%;
+  padding: 20px; /* Tamaño más grande */
+  background-color: #755847;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em; /* Tamaño más grande */
+}
+
+.login-button:hover {
+  background-color: #5f4536;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 1.2em; /* Tamaño más grande */
+}
+
+.forgot-password a {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.forgot-password a:hover {
+  color: #23527c;
+}
+
+.error-message {
+  color: red;
+  font-size: 1em; /* Tamaño más grande */
+}
+
+@media (max-width: 768px) {
+  .Login-Sect {
     flex-direction: column;
-    align-items: center;
   }
-  
-  .form-group {
-    margin-bottom: 20px;
+
+  .image-container, .login-container {
+    max-width: 100%;
+    margin: 0;
   }
-  
-  .login-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+  .login-container {
+    padding: 20px;
   }
-  
-  .login-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  .forgot-password {
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .forgot-password a {
-    text-decoration: none;
-    color: #337ab7;
-  }
-  
-  .forgot-password a:hover {
-    color: #23527c;
-  }
+}
