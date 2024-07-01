@@ -11,7 +11,7 @@ import {ConsultarPasantias} from './Pages/ConsultarPasantias.jsx'
 import {ConsultarEmpresas} from './Pages/ConsultarEmpresas.jsx'
 import { PreguntasFrecuentes } from './Pages/PreguntasFrecuentes.jsx';
 import { PasantiaDetalle } from './Pages/PasantiaDetalles.jsx';
-
+import { EmpresaDetalle } from './Pages/EmpresaDetalles.jsx';
 const router = createBrowserRouter([
 
 {   
@@ -48,10 +48,15 @@ const router = createBrowserRouter([
 {
   path:"/pasantia/:id",
   element:<PasantiaDetalle/>
+},
+{
+  path:"/empresa/:id",
+  element:<EmpresaDetalle/>
 }
 
 ]);
 import './index.css'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
