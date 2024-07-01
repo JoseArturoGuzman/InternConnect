@@ -21,13 +21,13 @@ export function Header() {
           <li className="dropdown">
             <a href="#">Pasantías</a>
             <ul className="dropdown-menu">
-              <li><Link to="/ConsultarPasantias"> Consultar pasantías</Link></li>
+              <li><Link to="/ConsultarPasantias"> Consultar</Link></li>
             </ul>
           </li>
           <li className="dropdown">
             <a href="#">Empresas</a>
             <ul className="dropdown-menu">
-              <li><Link to="/ConsultarEmpresas">Consultar Empresas</Link></li>
+              <li><Link to="/ConsultarEmpresas">Consultar </Link></li>
             </ul>
           </li>
         </ul>

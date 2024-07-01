@@ -18,7 +18,7 @@
 }
 
 .logo-text {
-  font-size: 20px;
+  font-size: 25px;
   color: #4D2D18;
   text-align: center;
   margin-top: 5px; /* Espacio entre el logo y el texto */
@@ -35,7 +35,7 @@
 
 .nav-links li {
   margin-right: 25px;
-  font-size: 28px;
+  font-size: 32px;
   position: relative; /* Necesario para el dropdown */
 }
 

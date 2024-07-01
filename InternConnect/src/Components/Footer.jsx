@@ -5,16 +5,16 @@ import Logo from "../Images/LogoInternConnect.png";
 export function Footer() {
   return (
     <footer className='rectangle'>
-      <img src={Logo} alt="InternConnect Logo" className="logo" />
-      
-      <div className='regroup'>
-        <a href='/Preguntas' className='preguntas-frecuentes'>Preguntas Frecuentes</a>
-        <a href='mailto:pasantias@gmail.com' className='text-9'>Contactanos: Pasantías@gmail.com</a>
+      <div className='footer-content'>
+        <img src={Logo} alt="InternConnect Logo" className="logo" />
+        <div className='footer-text'>
+          <a href='/Preguntas' className='preguntas-frecuentes'>Preguntas Frecuentes</a>
+          <a href='mailto:pasantias@gmail.com' className='text-9'>Contactanos: Pasantías@gmail.com</a>
+          <span className='text-a'>
+            Copyright © 2024 Pasantías.com. All Rights Reserved.
+          </span>
+        </div>
       </div>
-      
-      <span className='text-a'>
-        Copyright © 2024 Pasantías.com. All Rights Reserved.
-      </span>
     </footer>
   );
 }

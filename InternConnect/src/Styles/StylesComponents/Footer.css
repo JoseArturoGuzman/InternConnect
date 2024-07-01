@@ -1,37 +1,55 @@
 /* StylesComponents/Footer.css */
+
 .rectangle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #4D2D18;
   color: white;
-  padding: 20px;
+  padding: 20px 0;
   width: 100%;
-  text-align: center;
   position: relative;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px; /* Ajusta esto según necesites */
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacio entre la imagen y el texto */
+  max-width: 800px; /* Ajusta el ancho máximo según necesites */
+  width: 100%;
 }
 
 .logo {
-  width: 100px;
-  margin-bottom: 10px;
+  width: 70px; /* Ajusta el tamaño según necesites */
+  height: auto;
+  margin: 0.5em;
 }
 
-.regroup {
+.footer-text {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 40px; /* Espacio entre los textos */
+  font-size: 1.2em; /* Ajusta el tamaño de fuente según necesites */
 }
 
 .preguntas-frecuentes,
-.text-9 {
+.text-9,
+.text-a {
   color: white;
   text-decoration: none;
-  margin: 5px 0;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
-.text-a {
-  margin-top: 10px;
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-text {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

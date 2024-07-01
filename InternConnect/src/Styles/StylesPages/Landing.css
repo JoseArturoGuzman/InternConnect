@@ -1,4 +1,5 @@
-/* Estilo para asegurar que el footer esté siempre en la parte inferior */
+/* StylesComponents/Landing.css */
+
 .page-container {
   display: flex;
   flex-direction: column;
@@ -11,43 +12,74 @@
 
 .background-container {
   position: relative;
-  width: 100%;
+}
+section h2{
+  margin-left: 35px;
+  font-size: 28px;
+  color: #55372d;
+  padding-top: 35px;
+  padding-bottom: 25px;
+
 }
 
 .background-image {
-  width: 100vw;
-  min-height: 100%; /* Asegura que cubra al menos la altura del contenedor */
-  object-fit: cover;
+  width: 100%;
+  height: auto;
 }
 
 .overlay {
   position: absolute;
-  top: 50%;
-  left: 10%; /* Ajusta el valor para mover el texto más cerca de la izquierda */
-  transform: translateY(-50%); /* Solo mueve el texto verticalmente al centro */
-  color: white;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .overlay-text {
-  font-size: 48px;
-  font-weight: bold;
-  text-align: left;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold; /* Añadido para poner el texto en negrita */
 }
+
+.scroll-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.scroll-button {
+  background-color: #FFF8F2;
+  border: none;
+  color: #755847;
+  padding: 10px 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
 
 .empresas-asociadas {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 20px 0;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  margin: 0 10px;
+  padding: 10px;
+  width: 80%;
 }
 
 .empresa-imagen {
   width: 150px;
   height: 150px;
-  object-fit: contain;
-  cursor: pointer;
-  transition: transform 0.2s;
+  margin: 0 10px;
+  transition: transform 0.3s ease;
 }
 
 .empresa-imagen:hover {
