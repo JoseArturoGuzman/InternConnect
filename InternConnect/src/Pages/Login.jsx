@@ -89,7 +89,7 @@ export function Login() {
           <div className="forgot-password">
             <a href="#">¿Haz olvidado tu Contraseña?</a>
           </div>
-          <span>¿Eres Nuevo?</span> <Link to="/Registro">Resgístrate</Link>
+          <span className="register-text">¿Eres Nuevo?</span> <Link to="/Registro" className="register-link">Regístrate</Link>
         </form>
       </div>
     </section>

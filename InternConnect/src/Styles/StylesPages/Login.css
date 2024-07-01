@@ -1,9 +1,11 @@
+/* Estilos para el componente Login */
+
 .Login-Sect {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
-  align-items: stretch; /* Cambiado a stretch para que la imagen ocupe toda la altura */
+  align-items: stretch;
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -14,7 +16,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  display: flex; /* Asegura que el contenedor de la imagen use todo el espacio disponible */
+  display: flex;
 }
 
 .image-container img {
@@ -29,7 +31,7 @@
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background-color: #FFF8F2;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,22 +40,28 @@
 
 .logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-  font-size: 1.5em; /* Tamaño más grande para el texto del logo */
+  text-align: center;
 }
 
 .logo img {
-  width: 60px; /* Tamaño más grande */
-  height: 60px; /* Tamaño más grande */
-  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.logo p {
+  font-size: 1.5em;
+  margin: 0;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 350px; /* Ancho más grande */
+  max-width: 350px;
   align-items: center;
 }
 
@@ -63,23 +71,23 @@
 }
 
 .form-group label {
-  font-size: 1.2em; /* Tamaño más grande para las etiquetas */
+  font-size: 1.2em;
 }
 
 .form-group input {
   padding: 10px;
-  font-size: 1.2em; /* Tamaño más grande para los campos de entrada */
+  font-size: 1.2em;
 }
 
 .login-button {
   width: 100%;
-  padding: 20px; /* Tamaño más grande */
+  padding: 20px;
   background-color: #755847;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2em; /* Tamaño más grande */
+  font-size: 1.2em;
 }
 
 .login-button:hover {
@@ -87,14 +95,15 @@
 }
 
 .forgot-password {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
-  font-size: 1.2em; /* Tamaño más grande */
+  font-size: 1.2em;
 }
 
 .forgot-password a {
   text-decoration: none;
   color: #337ab7;
+  font-size: 1.2em;
 }
 
 .forgot-password a:hover {
@@ -103,20 +112,14 @@
 
 .error-message {
   color: red;
-  font-size: 1em; /* Tamaño más grande */
+  font-size: 1em;
 }
 
-@media (max-width: 768px) {
-  .Login-Sect {
-    flex-direction: column;
-  }
+.register-text {
+  font-size: 1.3em; /* Aumenta el tamaño del texto '¿Eres Nuevo?' */
+  margin-right: 5px; /* Ajusta el espacio entre el texto y el enlace de registro */
+}
 
-  .image-container, .login-container {
-    max-width: 100%;
-    margin: 0;
-  }
-
-  .login-container {
-    padding: 20px;
-  }
+.register-link {
+  font-size: 1.3em; /* Aumenta el tamaño del enlace de registro */
 }

@@ -1,0 +1,61 @@
+.pasantia-detalle {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+    font-size: 20px;
+  }
+  
+  .pasantia-info {
+    flex: 1;
+  }
+  
+  .pasantia-imagen-boton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .pasantia-imagen {
+    width: 100%;
+    height: auto; /* Asegúrate de que la imagen mantenga su proporción */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .aplicar-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 22px; /* Aumentado para un mejor tamaño */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Añadido para separar del margen inferior */
+  }
+  
+  .aplicar-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Añadir ajustes responsivos si es necesario */
+  @media (max-width: 768px) {
+    .pasantia-detalle {
+      flex-direction: column;
+      font-size: 18px;
+    }
+  
+    .pasantia-imagen-boton {
+      max-width: 100%;
+      margin-bottom: 20px; /* Separación adicional en vistas móviles */
+    }
+  
+    .aplicar-button {
+      font-size: 16px; /* Ajuste del tamaño del botón en vistas móviles */
+      }
+  }
+  

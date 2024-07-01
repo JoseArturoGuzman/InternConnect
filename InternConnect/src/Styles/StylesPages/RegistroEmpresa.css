@@ -1,16 +1,39 @@
 /* RegistroEmpresa.css */
+
+.registro-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.image-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  z-index: -1;
+}
+
 .registro-form {
-  background-color: #f7f7f7;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
-  padding: 20px;
-  max-width: 400px;
-  margin: 50px auto;
+  padding: 30px; /* Reducido el padding para disminuir la altura interna */
+  max-width: 800px; /* Aumentado para hacer el formulario más ancho */
+  width: 25%;
+  margin: 30px auto; /* Reducido el margen para ajustar el formulario más hacia el centro */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
 
 .form-title {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 27px;
   color: #333;
   text-align: center;
 }
@@ -24,13 +47,16 @@
   margin-bottom: 5px;
   font-weight: bold;
   color: #555;
+  font-size: 27px; /* Tamaño de letra de las etiquetas */
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   width: calc(100% - 20px);
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 25px; /* Tamaño de letra de los inputs y selects */
 }
 
 .form-group input:focus {
@@ -41,16 +67,16 @@
 
 .submit-button {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #755847;
   color: #fff;
-  font-size: 16px;
+  font-size: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #5f4536;
 }

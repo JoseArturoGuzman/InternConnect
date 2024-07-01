@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header } from "../Components/Header";
 import { Link } from "react-router-dom";
 import { Footer } from "../Components/Footer";
+import "../Styles/StylesPages/ConsultarEmpresas.css";
 
 const CompanyCard = ({ name, description, industry, id, image }) => {
   return (
@@ -21,6 +22,8 @@ const CompanyCard = ({ name, description, industry, id, image }) => {
 };
 
 const CompanyList = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const companies = [
     {
       id: 1,
@@ -43,23 +46,40 @@ const CompanyList = () => {
       industry: 'Tecnología',
       image: 'https://via.placeholder.com/150x100',
     },
+    // Añade más empresas aquí...
   ];
 
+  const filteredCompanies = companies.filter((company) =>
+    company.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="company-list">
-      {companies.map((company, index) => (
-        <CompanyCard key={index} {...company} />
-      ))}
+    <div>
+      <input
+        type="text"
+        placeholder="Buscar empresa..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
+      <div className="company-list">
+        {filteredCompanies.map((company, index) => (
+          <CompanyCard key={index} {...company} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export function ConsultarEmpresas(){
-    return(
+export function ConsultarEmpresas() {
+  return (
     <div>
-        <Header/>
+      <Header />
+      <div className="companies-container">
+        <h1>Consultar Empresas</h1>
         <CompanyList />
-        <Footer/>
-    </div>    
-    )
+      </div>
+      <Footer />
+    </div>
+  );
 }

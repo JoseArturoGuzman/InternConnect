@@ -10,6 +10,8 @@ import { Registro } from './Pages/Registro.jsx';
 import {ConsultarPasantias} from './Pages/ConsultarPasantias.jsx'
 import {ConsultarEmpresas} from './Pages/ConsultarEmpresas.jsx'
 import { PreguntasFrecuentes } from './Pages/PreguntasFrecuentes.jsx';
+import { PasantiaDetalle } from './Pages/PasantiaDetalles.jsx';
+
 const router = createBrowserRouter([
 
 {   
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
 {
   path:"/Preguntas",
   element:<PreguntasFrecuentes/>
+},
+{
+  path:"/pasantia/:id",
+  element:<PasantiaDetalle/>
 }
 
 ]);
