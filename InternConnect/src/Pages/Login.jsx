@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Logo from "../Images/LogoInternConnect.png";
 import LoginImg from "../Images/LoginImg.jpg";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../Styles/StylesPages/Login.css";
 
 export function Login() {
@@ -9,6 +9,7 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [errorUsername, setErrorUsername] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,27 +30,8 @@ export function Login() {
       setErrorPassword(null);
     }
 
-    // Aquí puedes enviar los datos del formulario al backend
-    console.log('Username:', username);
-    console.log('Password:', password);
-
-    // Ejemplo de cómo podrías enviar los datos a una API usando fetch
-    /*
-    fetch('url_del_backend', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Manejar la respuesta del servidor
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-    */
+    // Redirigir a la página de consulta de pasantías
+    navigate('/ConsultarPasantias');
   };
 
   return (

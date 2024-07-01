@@ -76,7 +76,7 @@ export function ConsultarEmpresas() {
     <div>
       <Header />
       <div className="companies-container">
-        <h1>Consultar Empresas</h1>
+        <h1>Empresas asociadas</h1>
         <CompanyList />
       </div>
       <Footer />

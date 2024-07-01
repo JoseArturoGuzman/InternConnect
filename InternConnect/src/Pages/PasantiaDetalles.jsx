@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 import "../Styles/StylesPages/PasantiaDetalles.css"
@@ -20,6 +20,7 @@ const pasantiasData = {
 
 export function PasantiaDetalle() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const pasantia = pasantiasData[id];
 
   if (!pasantia) {
@@ -27,7 +28,8 @@ export function PasantiaDetalle() {
   }
 
   const handleAplicar = () => {
-    alert("¡Has aplicado a esta pasantía!");
+    // Redirigir a la página de login
+    navigate('/login');
   };
 
   return (

@@ -46,6 +46,10 @@ const router = createBrowserRouter([
   element:<PreguntasFrecuentes/>
 },
 {
+  path:"/PerfilEstudiante",
+  element: <PerfilEstudiantes/>
+},
+{
   path:"/pasantia/:id",
   element:<PasantiaDetalle/>
 },
@@ -56,6 +60,7 @@ const router = createBrowserRouter([
 
 ]);
 import './index.css'
+import { PerfilEstudiantes } from './Pages/PerfilEstudiante.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

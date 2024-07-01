@@ -1,0 +1,113 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .container {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: #FFF8F2;
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .inner-container {
+    width: 1051px;
+    height: 759px;
+    position: absolute;
+    left: 169px;
+    top: 311px;
+    background: #FFDBC8;
+    border-radius: 34px;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 272px;
+    top: 179px;
+  }
+  
+  .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .header {
+    color: #172026;
+    font-size: 24px; /* Reduced font size */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 45px;
+    word-wrap: break-word;
+  }
+  
+  .content {
+    width: 929px;
+    height: 563px;
+    position: absolute;
+    left: 223px;
+    top: 348px;
+    color: #172026;
+    font-size: 16px; /* Reduced font size */
+    font-family: 'Inter', sans-serif;
+    line-height: 30px;
+    word-wrap: break-word;
+  }
+  
+  .content-bold {
+    font-weight: 700;
+  }
+  
+  .content-regular {
+    font-weight: 400;
+  }
+  
+  .switch {
+    width: 59px;
+    height: 26.55px;
+    position: absolute;
+    left: 1028px;
+    top: 185px;
+  }
+  
+  .switch-background {
+    width: 59px;
+    height: 26.55px;
+    position: absolute;
+    background: #D9D9D9;
+    box-shadow: 0px 6px 8px 3px rgba(0, 0, 0, 0.10) inset;
+    border-radius: 50px;
+  }
+  
+  .switch-toggle {
+    width: 20.65px;
+    height: 20.65px;
+    position: absolute;
+    left: 2.95px;
+    top: 2.95px;
+    background: linear-gradient(180deg, white 0%, #E8EAEA 100%);
+    border-radius: 9999px;
+    box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.25);
+  }
+  
+  .edit-mode {
+    width: 263px;
+    height: 50px;
+    position: absolute;
+    left: 1100px;
+    top: 173px;
+    color: #172026;
+    font-size: 24px; /* Reduced font size */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 45px;
+    word-wrap: break-word;
+  }
+  
