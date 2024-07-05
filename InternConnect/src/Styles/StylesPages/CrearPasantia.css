@@ -1,0 +1,32 @@
+.crear-pasantia-container {
+    padding: 20px;
+  }
+  
+  .crear-pasantia-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .crear-pasantia-form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .crear-pasantia-form label {
+    font-weight: bold;
+  }
+  
+  .crear-pasantia-form input,
+  .crear-pasantia-form textarea,
+  .crear-pasantia-form select {
+    padding: 8px;
+    font-size: 1em;
+  }
+  
+  .crear-pasantia-form button {
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  

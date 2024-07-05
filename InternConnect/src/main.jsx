@@ -12,6 +12,9 @@ import {ConsultarEmpresas} from './Pages/ConsultarEmpresas.jsx'
 import { PreguntasFrecuentes } from './Pages/PreguntasFrecuentes.jsx';
 import { PasantiaDetalle } from './Pages/PasantiaDetalles.jsx';
 import { EmpresaDetalle } from './Pages/EmpresaDetalles.jsx';
+import {PasantiasInterna} from './Pages/PasantiasInterna.jsx';
+import { CrearPasantia } from './Pages/CrearPasantia.jsx';
+
 const router = createBrowserRouter([
 
 {   
@@ -56,7 +59,16 @@ const router = createBrowserRouter([
 {
   path:"/empresa/:id",
   element:<EmpresaDetalle/>
+},
+{
+  path:"/pasantias-internas",
+  element: <PasantiasInterna/>
+},
+{
+  path:"/crear-pasantia",
+  element: <CrearPasantia/>
 }
+
 
 ]);
 import './index.css'

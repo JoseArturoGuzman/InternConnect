@@ -1,0 +1,137 @@
+/* Estilos específicos para el componente PasantiasInterna */
+
+.pasantias-internas {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido ocupe al menos toda la altura de la pantalla */
+  }
+  
+  .pasantias-internas .content-wrapper {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .pasantias-internas .buscador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .pasantias-internas .search-input {
+    display: block;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+  }
+  
+  .pasantias-internas .crear-pasantia {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px; /* Ajuste de margen para separación del botón de búsqueda */
+  }
+  
+  .pasantias-internas .internship-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre las tarjetas */
+    margin-bottom: 20px;
+  }
+  
+  .pasantias-internas .internship-card {
+    flex: 1 0 calc(20% - 20px); /* Ocupa un quinto del contenedor con un margen derecho */
+    max-width: calc(20% - 20px); /* El 20px es el espacio entre tarjetas */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #F3DFD1; /* Color de fondo para las tarjetas de pasantía */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pasantias-internas .internship-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .pasantias-internas .internship-card-header {
+    position: relative;
+  }
+  
+  .pasantias-internas .internship-card-body {
+    padding: 15px;
+  }
+  
+  .pasantias-internas .internship-card-actions {
+    display: flex;
+    flex-direction: column; /* Alinear botones uno encima del otro */
+    align-items: flex-start; /* Alinear al inicio */
+  }
+  
+  .pasantias-internas .action-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espacio entre botones */
+  }
+  
+  .pasantias-internas .edit-button {
+    background-color: #28B463;
+    color: white;
+  }
+  
+  .pasantias-internas .delete-button {
+    background-color: #FF5722;
+    color: white;
+  }
+  
+  @media (max-width: 1400px) {
+    .pasantias-internas .internship-card {
+      flex: 1 0 calc(25% - 20px); /* Ocupa un cuarto del contenedor con un margen derecho */
+      max-width: calc(25% - 20px); /* El 20px es el espacio entre tarjetas */
+    }
+  }
+  
+  @media (max-width: 1100px) {
+    .pasantias-internas .internship-card {
+      flex: 1 0 calc(33.33% - 20px); /* Ocupa un tercio del contenedor con un margen derecho */
+      max-width: calc(33.33% - 20px); /* El 20px es el espacio entre tarjetas */
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .pasantias-internas .internship-card {
+      flex: 1 0 calc(50% - 20px); /* Ocupa la mitad del contenedor con un margen derecho */
+      max-width: calc(50% - 20px); /* El 20px es el espacio entre tarjetas */
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .pasantias-internas .internship-card {
+      flex: 1 0 calc(100% - 20px); /* Ocupa todo el ancho disponible con un margen derecho */
+      max-width: calc(100% - 20px); /* El 20px es el espacio entre tarjetas */
+    }
+    
+    .internship-card-header h3 {
+      font-size: 1.4em; /* Ligeramente más grande en móviles */
+    }
+    
+    .internship-card-company,
+    .internship-card-location,
+    .internship-card-remuneration {
+      font-size: 1.1em; /* Ligeramente más grande en móviles */
+    }
+  }
+  
