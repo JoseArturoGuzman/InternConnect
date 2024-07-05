@@ -200,6 +200,7 @@
             <label htmlFor="confirmarContraseña">Confirmar Contraseña:</label>
             <input
               type="password"
+              
               id="confirmarContraseña"
               value={confirmarContraseña}
               onChange={(e) => setConfirmarContraseña(e.target.value)}
