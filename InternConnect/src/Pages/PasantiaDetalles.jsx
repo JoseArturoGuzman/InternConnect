@@ -7,12 +7,19 @@ import "../Styles/StylesPages/PasantiaDetalles.css"
 const pasantiasData = {
   1: {
     title: "Full Stack React/Java Developer",
+    description: "Únete a nuestro equipo como desarrollador Full Stack. Trabajarás en proyectos emocionantes utilizando React y Java.",
+    isRemunerated: true,
+    dineroRemunera: "RD$ 30,000",
+    duracion: "6 meses",
+    idEmpresa: 1,
+    modalidadPasa: "Remoto",
+    requisitos: ["Conocimiento en React", "Experiencia con Java", "Habilidades de comunicación"],
+    area: "Desarrollo de Software",
+    estado: "Activa",
+    idBeneficios: [1, 2, 3],
+    rol: "Desarrollador",
     company: "FullStack Labs",
     location: "Santo Domingo, Distrito Nacional (Remoto)",
-    isRemunerated: true,
-    description: "Únete a nuestro equipo como desarrollador Full Stack. Trabajarás en proyectos emocionantes utilizando React y Java.",
-    requirements: ["Conocimiento en React", "Experiencia con Java", "Habilidades de comunicación"],
-    responsibilities: ["Desarrollar nuevas características", "Mantener código existente", "Colaborar con el equipo de diseño"],
     image: "https://via.placeholder.com/150x100"
   },
   // Añade más pasantías aquí...
@@ -32,6 +39,10 @@ export function PasantiaDetalle() {
     navigate('/login');
   };
 
+  const handleEmpresaClick = () => {
+    navigate(`/empresa/${pasantia.idEmpresa}`);
+  };
+
   return (
     <div>
       <Header />
@@ -39,21 +50,20 @@ export function PasantiaDetalle() {
         <div className="pasantia-detalle">
           <div className="pasantia-info">
             <h1 className="pasantia-title">{pasantia.title}</h1>
-            <h2 className="pasantia-company">{pasantia.company}</h2>
+            <h2 className="pasantia-company" onClick={handleEmpresaClick} style={{ cursor: 'pointer', color: 'blue' }}>{pasantia.company}</h2>
             <p><strong>Ubicación:</strong> {pasantia.location}</p>
             <p><strong>Remuneración:</strong> {pasantia.isRemunerated ? 'Remunerada' : 'No remunerada'}</p>
+            {pasantia.isRemunerated && <p><strong>Monto Remuneración:</strong> {pasantia.dineroRemunera}</p>}
+            <p><strong>Duración:</strong> {pasantia.duracion}</p>
+            <p><strong>Modalidad:</strong> {pasantia.modalidadPasa}</p>
+            <p><strong>Área:</strong> {pasantia.area}</p>
+            <p><strong>Estado:</strong> {pasantia.estado}</p>
             <h3>Descripción</h3>
             <p className="pasantia-description">{pasantia.description}</p>
             <h3>Requisitos</h3>
             <ul className="pasantia-requirements">
-              {pasantia.requirements.map((req, index) => (
+              {pasantia.requisitos.map((req, index) => (
                 <li key={index}>{req}</li>
-              ))}
-            </ul>
-            <h3>Responsabilidades</h3>
-            <ul className="pasantia-responsibilities">
-              {pasantia.responsibilities.map((resp, index) => (
-                <li key={index}>{resp}</li>
               ))}
             </ul>
           </div>

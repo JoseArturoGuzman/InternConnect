@@ -10,11 +10,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .logo {
-  width: 70px;
-  height: 70px;
+  width: 360px;
+  height: auto;
+  margin: 0.9em;
 }
 
 .logo-text {
@@ -22,6 +24,7 @@
   color: #4D2D18;
   text-align: center;
   margin-top: 5px; /* Espacio entre el logo y el texto */
+  
 }
 
 .nav-links {
@@ -35,13 +38,14 @@
 
 .nav-links li {
   margin-right: 25px;
-  font-size: 32px;
+  font-size: 25px;
   position: relative; /* Necesario para el dropdown */
 }
 
 .nav-links a {
   text-decoration: none;
   color: #4D2D18;
+  font-weight: 800;
 }
 
 .nav-links a:hover {

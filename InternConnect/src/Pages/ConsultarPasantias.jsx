@@ -1,26 +1,9 @@
 import React, { useState } from "react";
 import { Header } from "../Components/Header";
-import { Link } from "react-router-dom";
 import { Footer } from "../Components/Footer";
 import "../Styles/StylesPages/ConsultarPasantias.css";
+import PasantiaCard from "../Components/CartaPasantia";
 
-const PasantiaCard = ({ title, company, location, isRemunerated, id, image }) => {
-  return (
-    <Link to={`/pasantia/${id}`}>
-      <div className="internship-card">
-        <div className="internship-card-header">
-          <img src={image} alt={title} className="internship-card-image" />
-          <h3>{title}</h3>
-          <span className="internship-card-company">{company}</span>
-        </div>
-        <div className="internship-card-body">
-          <p className="internship-card-location">{location}</p>
-          <p className="internship-card-remuneration">{isRemunerated ? 'Remunerada' : 'No remunerada'}</p>
-        </div>
-      </div>
-    </Link>
-  );
-};
 
 const InternshipList = () => {
   const [searchTerm, setSearchTerm] = useState("");

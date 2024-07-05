@@ -21,11 +21,6 @@
   width: 100%;
 }
 
-.logo {
-  width: 70px; /* Ajusta el tamaño según necesites */
-  height: auto;
-  margin: 0.5em;
-}
 
 .footer-text {
   display: flex;

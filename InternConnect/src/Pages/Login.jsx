@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from "../Images/LogoInternConnect.png";
+import Logo from "../Images/NewLogo.png";
 import LoginImg from "../Images/LoginImg.jpg";
 import { Link, useNavigate } from 'react-router-dom';
 import "../Styles/StylesPages/Login.css";
@@ -42,7 +42,7 @@ export function Login() {
       <div className="login-container">
         <div className="logo">
           <img src={Logo} alt="Logo de la Universidad" />
-          <p>InternConnect</p>
+          
         </div>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
