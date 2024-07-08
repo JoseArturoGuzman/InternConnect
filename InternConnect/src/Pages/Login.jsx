@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../Components/authContext";
 import Logo from "../Images/NewLogo.png";
 import LoginImg from "../Images/LoginImg.jpg";
-import { Link, useNavigate } from 'react-router-dom';
 import "../Styles/StylesPages/Login.css";
 
 export function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorUsername, setErrorUsername] = useState(null);
-  const [errorPassword, setErrorPassword] = useState(null);
+  const [error, setError] = useState('');
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
 
     // Validación del correo electrónico
-    if (!username.includes('@')) {
-      setErrorUsername('El correo electrónico no es válido');
+    if (!email.includes('@')) {
+      setError('El correo electrónico no es válido');
       return;
-    } else {
-      setErrorUsername(null);
     }
 
     // Validación de la contraseña
     if (password.length < 8) {
-      setErrorPassword('La contraseña debe tener al menos 8 caracteres');
+      setError('La contraseña debe tener al menos 8 caracteres');
       return;
-    } else {
-      setErrorPassword(null);
     }
 
-    // Redirigir a la página de consulta de pasantías
-    navigate('/ConsultarPasantias');
+    const user = await loginUser(email, password);
+    if (user) {
+      if (user.tipoUsuario === 'estudiante') {
+        navigate('/PerfilEstudiante');
+      } else if (user.tipoUsuario === 'empresa') {
+        navigate('/PerfilEmpresa');
+      }
+    } else {
+      setError('Correo o contraseña incorrectos');
+    }
   };
 
   return (
@@ -42,19 +48,18 @@ export function Login() {
       <div className="login-container">
         <div className="logo">
           <img src={Logo} alt="Logo de la Universidad" />
-          
         </div>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="username">Correo:</label>
+            <label htmlFor="email">Correo:</label>
             <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {errorUsername && <div className="error-message">{errorUsername}</div>}
+            {error && <div className="error-message">{error}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="password">Contraseña:</label>
@@ -65,7 +70,6 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {errorPassword && <div className="error-message">{errorPassword}</div>}
           </div>
           <button type="submit" className="login-button">Log In</button>
           <div className="forgot-password">

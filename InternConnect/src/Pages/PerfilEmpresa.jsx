@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
-import userImage from "../Images/user.png"; // Ajusta la ruta a la imagen de usuario
-import "../Styles/StylesPages/PerfilEstudiante.css";
+import logoEmpresa from "../Images/Empresa1.png";
+import "../Styles/StylesPages/PerfilEmpresa.css";
 
 // Simulación de datos de la API
 const API_DATA = {
-  nombre: "José Ángel Florentino Pesquera",
-  correo: "josengelflorentino@gmail.com",
-  institucion: "INTEC",
-  area: "Ingeniería",
-  carreraActual: "Ingeniería de Software",
-  pasantiasPasadas: "Aún no se han cursado pasantías",
-  pasantiasActuales: "Aún no se han cursado pasantías"
+  nombre: "FullStack Labs",
+  correo: "FullStackLabs@gmail.com",
+  direccion: "Cra. 57 #99A-65, Riomar, Barranquilla, Atlántico, Colombia",
+  pasantiasActivas: 20,
+  descripcion: "FullStack is a technology partner that builds industry-leading software solutions through our FullStack Talent Network and FullStack Labs.",
+  linkedin: "https://www.linkedin.com/company/fullstack-labs/life/ourcompany/",
+  sitioWeb: "https://www.fullstack.com/"
 };
 
-export function PerfilEstudiantes() {
-  const [estudianteData, setEstudianteData] = useState(null);
+export function PerfilEmpresa() {
+  const [empresaData, setEmpresaData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -24,11 +24,12 @@ export function PerfilEstudiantes() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Simulación de una espera de datos (1 segundo)
         await new Promise(resolve => setTimeout(resolve, 1000));
-        setEstudianteData(API_DATA);
+        setEmpresaData(API_DATA);
         setLoading(false);
       } catch (error) {
-        setError('Error al cargar los datos del estudiante');
+        setError('Error al cargar los datos de la empresa');
         setLoading(false);
       }
     };
@@ -41,23 +42,23 @@ export function PerfilEstudiantes() {
   };
 
   const handleInputChange = (e, field) => {
-    setEstudianteData({
-      ...estudianteData,
+    setEmpresaData({
+      ...empresaData,
       [field]: e.target.value
     });
   };
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>{error}</div>;
-  if (!estudianteData) return <div>No se encontraron datos del estudiante</div>;
+  if (!empresaData) return <div>No se encontraron datos de la empresa</div>;
 
   return (
     <>
       <Header />
       <div className="container">
         <div className="header-container">
-          <img src={userImage} alt="Usuario" className="user-image" />
-          <div className="header">{estudianteData.nombre}</div>
+          <img src={logoEmpresa} alt="Logo Empresa" className="company-logo" />
+          <div className="header">{empresaData.nombre}</div>
           <button onClick={handleEditToggle} className={`edit-button ${editMode ? 'active' : ''}`}>
             {editMode ? 'Guardar' : 'Editar'}
           </button>
@@ -65,45 +66,45 @@ export function PerfilEstudiantes() {
         <main className="content">
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.correo} 
+            value={empresaData.correo} 
             onChange={(e) => handleInputChange(e, 'correo')} 
             className="content-regular"
             label="Correo: "
           />
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.institucion} 
-            onChange={(e) => handleInputChange(e, 'institucion')} 
+            value={empresaData.direccion} 
+            onChange={(e) => handleInputChange(e, 'direccion')} 
             className="content-regular"
-            label="Institución: "
+            label="Dirección: "
           />
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.area} 
-            onChange={(e) => handleInputChange(e, 'area')} 
+            value={empresaData.pasantiasActivas.toString()} 
+            onChange={(e) => handleInputChange(e, 'pasantiasActivas')} 
             className="content-regular"
-            label="Área: "
+            label="Pasantías Activas: "
           />
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.carreraActual} 
-            onChange={(e) => handleInputChange(e, 'carreraActual')} 
+            value={empresaData.descripcion} 
+            onChange={(e) => handleInputChange(e, 'descripcion')} 
             className="content-regular"
-            label="Carrera Actual:"
+            label="Descripción:"
           />
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.pasantiasPasadas} 
-            onChange={(e) => handleInputChange(e, 'pasantiasPasadas')} 
-            className="content-regular"
-            label="Pasantías Pasadas: "
+            value={empresaData.linkedin} 
+            onChange={(e) => handleInputChange(e, 'linkedin')} 
+            className="content-link"
+            label="LinkedIn:"
           />
           <EditableInput 
             editMode={editMode} 
-            value={estudianteData.pasantiasActuales} 
-            onChange={(e) => handleInputChange(e, 'pasantiasActuales')} 
-            className="content-regular"
-            label="Pasantías Actuales: "
+            value={empresaData.sitioWeb} 
+            onChange={(e) => handleInputChange(e, 'sitioWeb')} 
+            className="content-link"
+            label="Sitio Web:"
           />
         </main>
       </div>

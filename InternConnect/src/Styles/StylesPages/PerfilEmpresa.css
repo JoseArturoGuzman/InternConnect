@@ -1,0 +1,144 @@
+/* PerfilEmpresa.css */
+.body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 930px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #FFF8F2;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .company-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .header {
+    color: #172026;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 45px;
+    word-wrap: break-word;
+    margin-right: auto; /* Pushes the company name to the left */
+    margin-right: 75px;
+  }
+  
+  .content {
+    color: #172026;
+    font-size: 16px;
+    line-height: 30px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+    margin-left: -180px;
+  }
+  
+  .content-bold {
+    font-weight: 700;
+  }
+  
+  .content-regular {
+    font-weight: 400;
+  }
+  
+  .content-link {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .content-link:hover {
+    text-decoration: underline;
+  }
+  
+  .switch {
+    width: 59px;
+    height: 26.55px;
+    position: absolute;
+    left: calc(100% - 80px);
+    top: 185px;
+  }
+  
+  .switch-background {
+    width: 59px;
+    height: 26.55px;
+    position: absolute;
+    background: #D9D9D9;
+    box-shadow: 0px 6px 8px 3px rgba(0, 0, 0, 0.10) inset;
+    border-radius: 50px;
+  }
+  
+  .switch-toggle {
+    width: 20.65px;
+    height: 20.65px;
+    position: absolute;
+    left: 2.95px;
+    top: 2.95px;
+    background: linear-gradient(180deg, white 0%, #E8EAEA 100%);
+    border-radius: 9999px;
+    box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.25);
+  }
+  
+  .edit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .label-container {
+    margin-bottom: 10px; /* Espacio entre label y valor */
+  }
+  
+  .original-label {
+    font-weight: 700; /* Mantén el peso original del label */
+    font-size: 25px; /* Ajusta el tamaño según el diseño */
+    margin-right: 10px; /* Espacio entre label y valor */
+  }
+  
+  /* Ajustes para inputs y textareas */
+  .editable-input {
+    margin-bottom: 10px; /* Espacio entre los inputs */
+  }
+  
+  .editable {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%; /* Ajusta el ancho al 100% para que se expanda */
+    max-width: 100%; /* Ancho máximo */
+    resize: vertical; /* Permite redimensionar verticalmente en textareas */
+  }
+
+  .editable.input-only {
+    font-size: inherit;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+    margin: 0;
+    outline: none;
+  }

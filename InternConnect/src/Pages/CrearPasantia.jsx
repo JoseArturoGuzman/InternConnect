@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Header } from '../Components/Header';
 import { Footer } from '../Components/Footer';
@@ -24,6 +24,8 @@ export function CrearPasantia() {
     image: '',
   });
 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPasantia({
@@ -36,14 +38,28 @@ export function CrearPasantia() {
     e.preventDefault();
     const nuevaPasantia = { ...pasantia, id: Date.now(), visible: true };
     agregarPasantia(nuevaPasantia);
-    navigate('/');
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      navigate('/pasantias-internas');
+    }, 2000); // Redirige después de 2 segundos
   };
+
+  useEffect(() => {
+    let timeout;
+    if (showSuccessMessage) {
+      timeout = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 2000); // Oculta el mensaje después de 2 segundos
+    }
+    return () => clearTimeout(timeout);
+  }, [showSuccessMessage]);
 
   return (
     <div>
       <Header />
       <div className="crear-pasantia-container">
         <h1>Crear Nueva Pasantía</h1>
+        {showSuccessMessage && <div className="success-message">Pasantía creada correctamente.</div>}
         <form onSubmit={handleSubmit} className="crear-pasantia-form">
           <div>
             <label>Título</label>
@@ -150,6 +166,7 @@ export function CrearPasantia() {
               value={pasantia.descripcion}
               onChange={handleInputChange}
               required
+              className="wide-textarea"
             />
           </div>
           <div>
@@ -159,6 +176,7 @@ export function CrearPasantia() {
               value={pasantia.requisitos}
               onChange={handleInputChange}
               required
+              className="wide-textarea"
             />
           </div>
           <div>
@@ -170,7 +188,7 @@ export function CrearPasantia() {
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit">Crear Pasantía</button>
+          <button type="submit" className="green-button">Crear Pasantía</button>
         </form>
       </div>
       <Footer />

@@ -63,13 +63,15 @@
   display: none; /* Ocultar por defecto */
   position: absolute;
   top: 100%; /* Coloca el menú directamente debajo del elemento principal */
-  left: 0;
+  right: -26px;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   list-style: none;
   padding: 0;
   margin: 0;
+  border-radius: 50px;
+
 }
 
 .dropdown-menu li {

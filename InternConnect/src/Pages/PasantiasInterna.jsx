@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalEliminar from '../Components/EliminarPasantia';
-import '../Styles/StylesPages/PasantiasInterna.css';
+import styles from '../Styles/StylesPages/PasantiasInterna.module.css'; // Importa el archivo CSS Module
 import { Header } from '../Components/Header';
 import { Footer } from '../Components/Footer';
 
@@ -54,41 +54,43 @@ export function PasantiasInterna() {
   };
 
   return (
-    <div className="pasantias-internas">
+    <div className={styles['pasantias-internas']}>
       <Header />
-      <div className="buscador">
-        <input type="text" placeholder="Pasantía" className="search-input" />
-        <button className="crear-pasantia" onClick={irACrearPasantia}>
-          Crear Pasantía
-        </button>
+      <div className={styles['content-wrapper']}>
+        <div className={styles.buscador}>
+          <input type="text" placeholder="Buscar Pasantía" className={styles['search-input']} />
+          <button className={styles['crear-pasantia']} onClick={irACrearPasantia}>
+            Crear Pasantía
+          </button>
+        </div>
+        <h1 className={styles['main-title']}>Pasantías en la Empresa</h1>
+        <div className={styles['internship-list']}>
+          {pasantias
+            .filter((p) => p.visible)
+            .map((pasantia) => (
+              <div key={pasantia.id} className={styles['internship-card']}>
+                <div className={styles['internship-card-header']}>
+                  <h3 className={styles['internship-title']}>{pasantia.titulo}</h3>
+                </div>
+                <div className={styles['internship-card-body']}>
+                  <p className={styles['internship-card-location']}>{pasantia.ubicacion}</p>
+                  <p className={styles['internship-card-remuneration']}>{pasantia.remuneracion}</p>
+                </div>
+                <div className={styles['internship-card-actions']}>
+                  <button className={`${styles['action-button']} ${styles['edit-button']}`} onClick={() => handleEditarClick(pasantia)}>
+                    Editar
+                  </button>
+                  <button className={`${styles['action-button']} ${styles['delete-button']}`} onClick={() => handleEliminarClick(pasantia)}>
+                    Eliminar
+                  </button>
+                  <button className={styles['action-button']}>Pasantes</button>
+                </div>
+              </div>
+            ))}
+        </div>
+        {modalVisible && <ModalEliminar onConfirm={confirmarEliminar} onCancel={cancelarEliminar} />}
       </div>
-      <h1>Pasantías en la Empresa</h1>
-      <div className="internship-list">
-        {pasantias
-          .filter((p) => p.visible)
-          .map((pasantia) => (
-            <div key={pasantia.id} className="internship-card">
-              <div className="internship-card-header">
-                <h3>{pasantia.titulo}</h3>
-              </div>
-              <div className="internship-card-body">
-                <p className="internship-card-location">{pasantia.ubicacion}</p>
-                <p className="internship-card-remuneration">{pasantia.remuneracion}</p>
-              </div>
-              <div className="internship-card-actions">
-                <button className="action-button edit-button" onClick={() => handleEditarClick(pasantia)}>
-                  Editar
-                </button>
-                <button className="action-button delete-button" onClick={() => handleEliminarClick(pasantia)}>
-                  Eliminar
-                </button>
-                <button className="action-button">Pasantes</button>
-              </div>
-            </div>
-          ))}
-      </div>
-      {modalVisible && <ModalEliminar onConfirm={confirmarEliminar} onCancel={cancelarEliminar} />}
-      <Footer className="footer" />
+      <Footer />
     </div>
   );
 }

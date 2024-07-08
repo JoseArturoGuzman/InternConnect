@@ -1,16 +1,29 @@
 /* StylesComponents/Footer.css */
 
+/* Estilo global para asegurar que el cuerpo ocupe al menos el 100% de la altura */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Contenedor principal para que el footer se mantenga en la parte inferior */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Otros estilos existentes */
 .rectangle {
   background-color: #4D2D18;
   color: white;
-  padding: 20px 0;
+  padding: 10px 0; /* Reduce el padding para hacer el footer más pequeño */
   width: 100%;
-  position: relative;
-  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100px; /* Ajusta esto según necesites */
+  min-height: 60px; /* Reduce la altura mínima para hacer el footer más pequeño */
+  margin-top: auto; /* Hace que el footer se empuje al fondo */
 }
 
 .footer-content {
@@ -21,12 +34,12 @@
   width: 100%;
 }
 
-
 .footer-text {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
-  gap: 40px; /* Espacio entre los textos */
-  font-size: 1.2em; /* Ajusta el tamaño de fuente según necesites */
+  gap: 20px; /* Reduce el espacio entre los textos */
+  font-size: 0.9em; /* Ajusta el tamaño de fuente para que sea más pequeño */
 }
 
 .preguntas-frecuentes,
@@ -35,16 +48,4 @@
   color: white;
   text-decoration: none;
   white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-}
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-text {
-    flex-direction: column;
-    gap: 10px;
-  }
 }

@@ -14,6 +14,8 @@ import { PasantiaDetalle } from './Pages/PasantiaDetalles.jsx';
 import { EmpresaDetalle } from './Pages/EmpresaDetalles.jsx';
 import {PasantiasInterna} from './Pages/PasantiasInterna.jsx';
 import { CrearPasantia } from './Pages/CrearPasantia.jsx';
+import { AuthProvider } from './Components/authContext';
+
 
 const router = createBrowserRouter([
 
@@ -67,17 +69,22 @@ const router = createBrowserRouter([
 {
   path:"/crear-pasantia",
   element: <CrearPasantia/>
+}, {
+  path:"/PerfilEmpresa",
+  element:<PerfilEmpresa/>
 }
 
 
 ]);
 import './index.css'
 import { PerfilEstudiantes } from './Pages/PerfilEstudiante.jsx';
+import { PerfilEmpresa } from './Pages/PerfilEmpresa.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    
-   <RouterProvider  router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
   </React.StrictMode>,
 )

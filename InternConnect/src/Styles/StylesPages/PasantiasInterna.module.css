@@ -1,0 +1,135 @@
+/* PasantiasInterna.module.css */
+
+/* PasantiasInterna.module.css */
+
+.pasantias-internas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenido ocupe al menos toda la altura de la pantalla */
+  background-color: #FFF8F2; /* Color de fondo suave */
+}
+
+.content-wrapper {
+  flex: 1; /* Ocupa todo el espacio disponible */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.buscador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 240px;
+}
+
+.search-input {
+  flex: 1; /* Ocupa el espacio restante */
+  max-width: 600px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.crear-pasantia {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.crear-pasantia:hover {
+  background-color: #45a049; /* Color ligeramente más oscuro al pasar el mouse */
+}
+
+.internship-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.internship-card {
+  width: 250px; /* Ancho fijo */
+  margin: 20px; /* Margen absoluto */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+} 
+
+.internship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.internship-card-header {
+  margin-bottom: 10px;
+}
+
+.internship-title {
+  font-size: 1.4em; /* Tamaño de fuente más grande */
+  color: #333; /* Color oscuro para mayor contraste */
+  margin-bottom: 10px;
+}
+
+.internship-card-body {
+  padding: 10px 0;
+}
+
+.internship-card-location,
+.internship-card-remuneration {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.internship-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #fff8f2; /* Color de fondo */
+  color: #333; /* Color del texto */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #f0e5db; /* Color ligeramente más oscuro al pasar el mouse */
+}
+
+.edit-button {
+  background-color: #fff8f2;
+  color: #333;
+}
+
+.delete-button {
+  background-color: #fff8f2;
+  color: #333;
+}
+
+@media (max-width: 1100px) {
+  .internship-card {
+    flex: 0 1 calc(50% - 20px); /* Ocupa la mitad del contenedor con margen */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 800px) {
+  .internship-card {
+    flex: 0 1 calc(100% - 20px); /* Ocupa todo el ancho del contenedor con margen */
+    max-width: calc(100% - 20px);
+  }
+}
