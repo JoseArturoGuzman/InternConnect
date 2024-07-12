@@ -1,23 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Styles/StylesPages/ConsultarPasantias.css";
+import "../Styles/StylesPages/CartaPasantias.css"; // Verifica esta ruta
 
-const PasantiaCard = ({ id, title, company, location, isRemunerated, image }) => {
+const CartaPasantia = ({ id, title, company, location, remunerated, image }) => {
   return (
-    <Link to={`/pasantia/${id}`}>
-      <div className="internship-card">
-        <div className="internship-card-header">
-          <img src={image} alt={title} className="internship-card-image" />
-          <h3>{title}</h3>
-          <span className="internship-card-company">{company}</span>
-        </div>
-        <div className="internship-card-body">
-          <p className="internship-card-location">{location}</p>
-          <p className="internship-card-remuneration">{isRemunerated ? 'Remunerada' : 'No remunerada'}</p>
-        </div>
+    <Link to={`/pasantia/${id}`} className="internship-card">
+      <img src={image} alt={company} className="internship-card-image" />
+      <div className="internship-card-content">
+        <h3>{title}</h3>
+        <p className="internship-card-company">{company}</p>
+        <p className="internship-card-location">{location}</p>
+        <p className="internship-card-remuneration">{remunerated ? 'Remunerada' : 'No remunerada'}</p>
       </div>
     </Link>
   );
 };
 
-export default PasantiaCard;
+export default CartaPasantia;

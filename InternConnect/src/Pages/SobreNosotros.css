@@ -1,0 +1,32 @@
+
+  
+  .sobre-nosotros-content {
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 25px;
+  }
+  
+  .sobre-nosotros-content h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .sobre-nosotros-content p {
+    font-size: 1.7em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .sobre-nosotros-content ol {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  .sobre-nosotros-content ol li {
+    font-size: 1.5em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  

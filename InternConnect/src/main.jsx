@@ -72,6 +72,10 @@ const router = createBrowserRouter([
 }, {
   path:"/PerfilEmpresa",
   element:<PerfilEmpresa/>
+},
+{
+  path:"/Pasantes",
+  element:<Pasante/>
 }
 
 
@@ -79,6 +83,7 @@ const router = createBrowserRouter([
 import './index.css'
 import { PerfilEstudiantes } from './Pages/PerfilEstudiante.jsx';
 import { PerfilEmpresa } from './Pages/PerfilEmpresa.jsx';
+import Pasante from './Pages/Pasantes.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,4 +1,4 @@
-/* StylesComponents/Landing.css */
+/* StylesPages/Landing.css */
 
 .page-container {
   display: flex;
@@ -13,13 +13,13 @@
 .background-container {
   position: relative;
 }
-section h2{
+
+section h2 {
   margin-left: 35px;
   font-size: 28px;
   color: #55372d;
-  padding-top: 35px;
+  padding-top: 0px;
   padding-bottom: 25px;
-
 }
 
 .background-image {
@@ -47,41 +47,59 @@ section h2{
   font-weight: bold; /* Añadido para poner el texto en negrita */
 }
 
-.scroll-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.scroll-button {
-  background-color: #FFF8F2;
-  border: none;
-  color: #755847;
-  padding: 10px 20px;
-  font-size: 2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-
-
+.ultimas-pasantias,
 .empresas-asociadas {
   display: flex;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  margin: 0 10px;
-  padding: 10px;
-  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-.empresa-imagen {
-  width: 150px;
-  height: 150px;
-  margin: 0 10px;
-  transition: transform 0.3s ease;
+.pasantias-list,
+.empresas-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 25px;
+  padding: 25px;
+  max-width: 1600px;
 }
 
-.empresa-imagen:hover {
-  transform: scale(1.1);
+.connect-talent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.connect-talent p {
+  flex: 1; /* Para que el párrafo ocupe el espacio disponible */
+  text-align: left; /* Alinear el texto a la izquierda */
+  font-size: 1.95rem; /* Tamaño de fuente ajustado */
+}
+
+.auth-buttons {
+  display: flex;
+}
+
+.btn-iniciar-sesion,
+.btn-registrarse {
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 1rem;
+  border-radius: 18px;
+  background-color: #FFF8F2;
+  color: #4D2D18; /* Color del texto */
+  border: 2px solid #4D2D18; /* Color del borde */
+  cursor: pointer;
+  text-decoration: none; /* Asegura que no haya subrayado */
+  display: inline-block; /* Asegura que se comporte como un bloque en línea */
+  text-align: center; /* Alineación del texto */
+}
+
+.btn-iniciar-sesion:hover,
+.btn-registrarse:hover {
+  background-color: #4D2D18;
+  color: white;
 }

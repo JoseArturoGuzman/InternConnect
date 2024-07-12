@@ -1,82 +1,43 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../Components/Header.jsx';
 import { Footer } from '../Components/Footer.jsx';
+import CartaPasantia from '../Components/CartaPasantia.jsx';
+import CartaEmpresa from '../Components/CartaEmpresa.jsx';
 import "../Styles/StylesPages/Landing.css";
-import BackgroundImage from "../Images/ImagenLanding.png"; // Asegúrate de usar la ruta correcta para tu imagen
-import Empresa1 from "../Images/Empresa1.png";
-import Empresa2 from "../Images/Empresa2.png";
-
+import BackgroundImage from "../Images/ImagenLanding.png";
+import { Link } from 'react-router-dom';
 export function Landing() {
+  const [pasantias, setPasantias] = useState([]);
   const [empresas, setEmpresas] = useState([]);
-  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
-    // Simula una llamada a la base de datos para obtener las imágenes de las empresas
-    const fetchEmpresas = () => {
-      const empresaData = [
-        { id: 1, src: Empresa1, alt: 'Empresa 1' },
-        { id: 2, src: Empresa2, alt: 'Empresa 2' },
-        { id: 3, src: Empresa1, alt: 'Empresa 1' },
-        { id: 4, src: Empresa2, alt: 'Empresa 2' },
-        { id: 5, src: Empresa1, alt: 'Empresa 1' },
-        { id: 6, src: Empresa2, alt: 'Empresa 2' },
-        { id: 7, src: Empresa1, alt: 'Empresa 1' },
-        { id: 8, src: Empresa2, alt: 'Empresa 2' },
+    // Simular la obtención de datos de pasantías
+    const fetchPasantias = () => {
+      const pasantiasData = [
+        { id: 1, title: 'Full Stack React/Java Developer', company: 'FullStack Labs', location: 'Santo Domingo, Distrito Nacional (Remoto)', remunerated: true, image: 'https://via.placeholder.com/150x100' },
+        { id: 2, title: 'Frontend Developer', company: 'Microsoft', location: 'Santo Domingo, Distrito Nacional (Remoto)', remunerated: true, image: 'https://via.placeholder.com/150x100' },
+        { id: 3, title: 'DevOps Engineer', company: 'Shopify', location: 'Toronto, Canada (Remoto)', remunerated: false, image: 'https://via.placeholder.com/150x100' },
+        { id: 4, title: 'Desarrollador Web', company: 'Grupo Popular', location: 'Santo Domingo, Distrito Nacional', remunerated: true, image: 'https://via.placeholder.com/150x100' },
+        { id: 5, title: 'Analisis de Datos', company: 'Banco BHD Leon', location: 'Santo Domingo, Distrito Nacional', remunerated: true, image: 'https://via.placeholder.com/150x100' },
       ];
-
-      setEmpresas(empresaData);
+      setPasantias(pasantiasData);
     };
 
+    // Simular la obtención de datos de empresas
+    const fetchEmpresas = () => {
+      const empresasData = [
+        { id: 1, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
+        { id: 2, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
+        { id: 3, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
+        { id: 4, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
+        { id: 5, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
+      ];
+      setEmpresas(empresasData);
+    };
+
+    fetchPasantias();
     fetchEmpresas();
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollContainerRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-        if (scrollLeft + clientWidth >= scrollWidth) {
-          scrollContainerRef.current.scrollLeft = scrollLeft - scrollWidth / 2;
-        } else if (scrollLeft <= 0) {
-          scrollContainerRef.current.scrollLeft = scrollWidth / 2;
-        }
-      }
-    };
-
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const autoScroll = () => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollLeft += 300; // Ajusta el valor según sea necesario
-      }
-    };
-
-    const intervalId = setInterval(autoScroll, 0); // Desplazamiento automático cada 2 segundos
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= 300; // Ajusta el valor según sea necesario
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += 300; // Ajusta el valor según sea necesario
-    }
-  };
 
   return (
     <div className="page-container">
@@ -88,16 +49,30 @@ export function Landing() {
             <h1 className="overlay-text">¡Potencia tu talento con las mejores oportunidades de pasantía!</h1>
           </div>
         </div>
-        <section>
-          <h2>Nuestras principales empresas asociadas.</h2>
-          <div className="scroll-buttons">
-            <button className="scroll-button left" onClick={scrollLeft}>&lt;</button>
-            <div className="empresas-asociadas" ref={scrollContainerRef}>
-              {[...empresas, ...empresas].map((empresa, idx) => (
-                <img key={idx} src={empresa.src} alt={empresa.alt} className="empresa-imagen" />
-              ))}
-            </div>
-            <button className="scroll-button right" onClick={scrollRight}>&gt;</button>
+
+        <section className="connect-talent">
+          <p>Conecta tu talento con las mejores oportunidades de pasantía y da los primeros pasos hacia una carrera exitosa.</p>
+          <div className="auth-buttons">
+          <Link to="/login" className="btn-iniciar-sesion">Iniciar sesión</Link>
+          <Link to="/registro" className="btn-registrarse">Registrarse</Link>
+          </div>
+        </section>
+
+        <section className="ultimas-pasantias">
+          <h2>Nuestras últimas pasantías:</h2>
+          <div className="pasantias-list">
+            {pasantias.slice(0, 5).map(pasantia => (
+              <CartaPasantia key={pasantia.id} {...pasantia} />
+            ))}
+          </div>
+        </section>
+
+        <section className="empresas-asociadas">
+          <h2>Nuestras principales empresas asociadas:</h2>
+          <div className="empresas-list">
+            {empresas.map(empresa => (
+              <CartaEmpresa key={empresa.id} {...empresa} />
+            ))}
           </div>
         </section>
       </main>
