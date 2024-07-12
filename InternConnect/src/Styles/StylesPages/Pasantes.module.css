@@ -1,0 +1,50 @@
+/* Styles/StylesPages/Pasantes.module.css */
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  
+  .pasante-section {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .titulo-volver {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .titulo-volver h1{
+    margin-right: 740px;
+  }
+  .btn-volver {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 18px;
+    background-color: #FFF8F2;
+    color: #4D2D18; /* Color del texto */
+    border: 2px solid #4D2D18; /* Color del borde */
+    cursor: pointer;
+    text-decoration: none; /* Asegura que no haya subrayado */
+    display: inline-block; /* Asegura que se comporte como un bloque en línea */
+    text-align: center; /* Alineación del texto */
+    width: 200px; /* Ancho fijo */
+    margin-left: 100px;
+  }
+  
+  .btn-volver:hover {
+    background-color: #4D2D18;
+    color: white;
+  }
+  

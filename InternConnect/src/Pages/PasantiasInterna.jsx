@@ -13,6 +13,16 @@ export function PasantiasInterna() {
       ubicacion: 'Santo Domingo, Distrito Nacional (Remoto)',
       remuneracion: 'Remunerada',
       visible: true,
+      pasantes: [
+        {
+          id: 1,
+          name: 'Juan Pérez',
+          career: 'Ingeniería en Informática',
+          university: 'Universidad de Ejemplo',
+          profileImageUrl: 'https://via.placeholder.com/150',
+        },
+        // Agregar más pasantes según sea necesario
+      ],
     },
     {
       id: 2,
@@ -20,6 +30,16 @@ export function PasantiasInterna() {
       ubicacion: 'Remote',
       remuneracion: 'No remunerada',
       visible: true,
+      pasantes: [
+        {
+          id: 2,
+          name: 'María Gómez',
+          career: 'Diseño Gráfico',
+          university: 'Otra Universidad',
+          profileImageUrl: 'https://via.placeholder.com/150',
+        },
+        // Agregar más pasantes según sea necesario
+      ],
     },
     {
       id: 3,
@@ -27,6 +47,9 @@ export function PasantiasInterna() {
       ubicacion: 'New York, NY (Remote)',
       remuneracion: 'Remunerada',
       visible: true,
+      pasantes: [
+        // Puedes inicializar con los pasantes correspondientes si ya tienes la información
+      ],
     },
     // Agrega más objetos de pasantías aquí si es necesario
   ]);
@@ -51,6 +74,11 @@ export function PasantiasInterna() {
 
   const irACrearPasantia = () => {
     navigate('/crear-pasantia');
+  };
+
+  const irAPasantes = (pasantes) => {
+    // Navegar a la página de pasantes con los pasantes específicos de esta pasantía
+    navigate('/pasantes', { state: { pasantes } });
   };
 
   return (
@@ -83,7 +111,9 @@ export function PasantiasInterna() {
                   <button className={`${styles['action-button']} ${styles['delete-button']}`} onClick={() => handleEliminarClick(pasantia)}>
                     Eliminar
                   </button>
-                  <button className={styles['action-button']}>Pasantes</button>
+                  <button className={styles['action-button']} onClick={() => irAPasantes(pasantia.pasantes)}>
+                    Pasantes
+                  </button>
                 </div>
               </div>
             ))}

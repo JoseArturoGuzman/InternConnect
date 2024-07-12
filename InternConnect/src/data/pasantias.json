@@ -1,0 +1,22 @@
+{
+    "pasantias": [
+      {
+        "IDPasantia": 1,
+        "Titulo": "Pasantía en Desarrollo Web",
+        "Descripcion": "Pasantía enfocada en el desarrollo web utilizando tecnologías modernas.",
+        "FechaIngreso": "2024-07-12T00:00:00",
+        "FechaFin": "2024-12-12T00:00:00",
+        "EsRemuneracion": true,
+        "DineroRemuneracion": 1000,
+        "Duracion": 6,
+        "IDEmpresa": 1,
+        "ModalidadPasa": "Remota",
+        "Requisitos": "Estudiantes de informática con conocimientos básicos de HTML, CSS y JavaScript.",
+        "Area": "Desarrollo Web",
+        "Estado": "Activa",
+        "IDBeneficios": 1,
+        "Rol": "Desarrollador Junior"
+      }
+    ]
+  }
+  
