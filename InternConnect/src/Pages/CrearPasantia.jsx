@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Header } from '../Components/Header';
 import { Footer } from '../Components/Footer';
 import '../Styles/StylesPages/CrearPasantia.css';
@@ -10,21 +11,24 @@ export function CrearPasantia() {
   const agregarPasantia = location.state && location.state.agregarPasantia;
 
   const [pasantia, setPasantia] = useState({
-    title: '',
-    empresa: '',
-    location: '',
-    remuneracion: 'Remunerada',
-    montoRemuneracion: '',
+    titulo: '',
+    descripcion: '',
+    fechaIngreso: new Date().toISOString(),
+    fechaFin: new Date().toISOString(),
+    esRemuneracion: true,
+    dineroRemuneracion: '',
     duracion: '',
-    modalidad: 'Remoto',
+    idEmpresa: 1,
+    modalidadPasa: 'Virtual',
+    requisitos: '',
     area: '',
     estado: 'Activa',
-    descripcion: '',
-    requisitos: '',
-    image: '',
+    idBeneficios: 1,
+    rol: 'Desarrollador',
   });
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,14 +38,29 @@ export function CrearPasantia() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const nuevaPasantia = { ...pasantia, id: Date.now(), visible: true };
-    agregarPasantia(nuevaPasantia);
-    setShowSuccessMessage(true);
-    setTimeout(() => {
-      navigate('/pasantias-internas');
-    }, 2000); // Redirige después de 2 segundos
+
+    try {
+      const response = await axios.post('https://localhost:7018/api/Pasantias', pasantia, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          navigate('/pasantias-internas');
+        }, 2000);
+      } else {
+        console.error('Error al crear la pasantía');
+        setErrorMessage('Error al crear la pasantía. Por favor, intenta nuevamente más tarde.');
+      }
+    } catch (error) {
+      console.error('Error al conectar con la API', error);
+      setErrorMessage('Error al conectar con la API. Por favor, intenta nuevamente más tarde.');
+    }
   };
 
   useEffect(() => {
@@ -49,7 +68,7 @@ export function CrearPasantia() {
     if (showSuccessMessage) {
       timeout = setTimeout(() => {
         setShowSuccessMessage(false);
-      }, 2000); // Oculta el mensaje después de 2 segundos
+      }, 2000);
     }
     return () => clearTimeout(timeout);
   }, [showSuccessMessage]);
@@ -60,33 +79,44 @@ export function CrearPasantia() {
       <div className="crear-pasantia-container">
         <h1>Crear Nueva Pasantía</h1>
         {showSuccessMessage && <div className="success-message">Pasantía creada correctamente.</div>}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <form onSubmit={handleSubmit} className="crear-pasantia-form">
           <div>
             <label>Título</label>
             <input
               type="text"
-              name="title"
-              value={pasantia.title}
+              name="titulo"
+              value={pasantia.titulo}
               onChange={handleInputChange}
               required
             />
           </div>
           <div>
-            <label>Empresa</label>
+            <label>Descripción</label>
+            <textarea
+              name="descripcion"
+              value={pasantia.descripcion}
+              onChange={handleInputChange}
+              required
+              className="wide-textarea"
+            />
+          </div>
+          <div>
+            <label>Fecha de Ingreso</label>
             <input
-              type="text"
-              name="empresa"
-              value={pasantia.empresa}
+              type="date"
+              name="fechaIngreso"
+              value={pasantia.fechaIngreso.split('T')[0]}
               onChange={handleInputChange}
               required
             />
           </div>
           <div>
-            <label>Ubicación</label>
+            <label>Fecha de Fin</label>
             <input
-              type="text"
-              name="location"
-              value={pasantia.location}
+              type="date"
+              name="fechaFin"
+              value={pasantia.fechaFin.split('T')[0]}
               onChange={handleInputChange}
               required
             />
@@ -94,31 +124,31 @@ export function CrearPasantia() {
           <div>
             <label>Remuneración</label>
             <select
-              name="remuneracion"
-              value={pasantia.remuneracion}
+              name="esRemuneracion"
+              value={pasantia.esRemuneracion}
               onChange={handleInputChange}
               required
             >
-              <option value="Remunerada">Remunerada</option>
-              <option value="No Remunerada">No Remunerada</option>
+              <option value={true}>Remunerada</option>
+              <option value={false}>No Remunerada</option>
             </select>
           </div>
-          {pasantia.remuneracion === 'Remunerada' && (
+          {pasantia.esRemuneracion && (
             <div>
               <label>Monto Remuneración</label>
               <input
                 type="text"
-                name="montoRemuneracion"
-                value={pasantia.montoRemuneracion}
+                name="dineroRemuneracion"
+                value={pasantia.dineroRemuneracion}
                 onChange={handleInputChange}
-                required
+                required={pasantia.esRemuneracion}
               />
             </div>
           )}
           <div>
-            <label>Duración</label>
+            <label>Duración (meses)</label>
             <input
-              type="text"
+              type="number"
               name="duracion"
               value={pasantia.duracion}
               onChange={handleInputChange}
@@ -128,12 +158,12 @@ export function CrearPasantia() {
           <div>
             <label>Modalidad</label>
             <select
-              name="modalidad"
-              value={pasantia.modalidad}
+              name="modalidadPasa"
+              value={pasantia.modalidadPasa}
               onChange={handleInputChange}
               required
             >
-              <option value="Remoto">Remoto</option>
+              <option value="Virtual">Remoto</option>
               <option value="Presencial">Presencial</option>
             </select>
           </div>
@@ -158,16 +188,6 @@ export function CrearPasantia() {
               <option value="Activa">Activa</option>
               <option value="Inactiva">Inactiva</option>
             </select>
-          </div>
-          <div>
-            <label>Descripción</label>
-            <textarea
-              name="descripcion"
-              value={pasantia.descripcion}
-              onChange={handleInputChange}
-              required
-              className="wide-textarea"
-            />
           </div>
           <div>
             <label>Requisitos</label>

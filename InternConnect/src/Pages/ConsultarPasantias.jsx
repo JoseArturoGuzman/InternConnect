@@ -1,114 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 import "../Styles/StylesPages/ConsultarPasantias.css";
 import PasantiaCard from "../Components/CartaPasantia";
 
-
 const InternshipList = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const internships = [
-    {
-      id: 1,
-      title: "Full Stack React/Java Developer",
-      company: "FullStack Labs",
-      location: "Santo Domingo, Distrito Nacional (Remoto)",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 2,
-      title: "Full Stack React/Java Developer",
-      company: "FullStack Labs",
-      location: "Santo Domingo, Distrito Nacional (Remoto)",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 3,
-      title: "Full Stack React/Java Developer",
-      company: "FullStack Labs",
-      location: "Santo Domingo, Distrito Nacional (Remoto)",
-      isRemunerated: false,
-      image: "https://via.placeholder.com/150x100",
-    },
-    // Agregar más pasantías aquí
-    {
-      id: 4,
-      title: "Frontend Developer Intern",
-      company: "Tech Startup X",
-      location: "Remote",
-      isRemunerated: false,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 5,
-      title: "Marketing Intern",
-      company: "Global Marketing Agency",
-      location: "New York, NY",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 6,
-      title: "Software Engineering Intern",
-      company: "Big Tech Inc.",
-      location: "San Francisco, CA (Remote)",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 7,
-      title: "Graphic Design Intern",
-      company: "Creative Studio Y",
-      location: "Los Angeles, CA",
-      isRemunerated: false,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 8,
-      title: "Data Science Intern",
-      company: "Data Analytics Solutions",
-      location: "Chicago, IL",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 9,
-      title: "UX/UI Design Intern",
-      company: "Design Innovations Co.",
-      location: "Seattle, WA",
-      isRemunerated: false,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 10,
-      title: "Business Development Intern",
-      company: "Startup Ventures Ltd.",
-      location: "London, UK",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 11,
-      title: "Product Management Intern",
-      company: "Product Innovation Inc.",
-      location: "Toronto, ON",
-      isRemunerated: false,
-      image: "https://via.placeholder.com/150x100",
-    },
-    {
-      id: 12,
-      title: "Digital Marketing Intern",
-      company: "Digital Marketing Solutions",
-      location: "Miami, FL",
-      isRemunerated: true,
-      image: "https://via.placeholder.com/150x100",
-    },
-  ];
+  const [internships, setInternships] = useState([]);
+
+  useEffect(() => {
+    const fetchInternships = async () => {
+      try {
+        const response = await axios.get("https://localhost:7018/api/Pasantias");
+        setInternships(response.data);
+      } catch (error) {
+        console.error("Error fetching internships:", error);
+      }
+    };
+
+    fetchInternships();
+  }, []);
 
   const filteredInternships = internships.filter((internship) =>
-    internship.title.toLowerCase().includes(searchTerm.toLowerCase())
+    internship.titulo.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -122,8 +37,8 @@ const InternshipList = () => {
         className="search-input"
       />
       <div className="internship-list">
-        {filteredInternships.map((internship, index) => (
-          <PasantiaCard key={index} {...internship} />
+        {filteredInternships.map((internship) => (
+          <PasantiaCard key={internship.idPasantia} title={internship.titulo} company={internship.empresa} location={internship.location} isRemunerated={internship.esRemuneracion} />
         ))}
       </div>
     </div>

@@ -56,7 +56,7 @@
         <div className={styles.botones}>
             <button className={styles['btn-perfil-completo']} onClick={handleProfileClick}>Perfil Completo</button>
             <button className={styles['btn-aceptar']} onClick={handleEditClick}>Aceptar</button>
-            <button className={styles['btn-eliminar']} onClick={handleDeleteClick}>Eliminar</button>
+            <button className={styles['btn-eliminar']} onClick={handleDeleteClick}>Rechazar</button>
         </div>
         </div>
     );
