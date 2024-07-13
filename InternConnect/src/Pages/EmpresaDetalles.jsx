@@ -1,92 +1,42 @@
-// EmpresaDetalle.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
-import PasantiaCard from '../Components/CartaPasantia'; // Importar el componente PasantiaCard
+import CartaPasantia from '../Components/CartaPasantia';
 import "../Styles/StylesPages/EmpresaDetalles.css";
-
-const empresasData = {
-  1: {
-    name: "FullStack Labs",
-    correoRRHH: "rrhh@fullstacklabs.com",
-    direccion: "Santo Domingo, Distrito Nacional",
-    description: "Desarrollo de software y servicios de tecnología. Proyectos innovadores y oportunidades de crecimiento.",
-    logoEmpresa: "https://via.placeholder.com/150x100",
-    contacto: "809-555-1234",
-    industry: "Tecnología",
-    image: "https://via.placeholder.com/150x100"
-  },
-  // Añade más empresas aquí...
-};
-
-const pasantiasData = {
-  1: {
-    id: 1,
-    title: "Full Stack React/Java Developer",
-    description: "Únete a nuestro equipo como desarrollador Full Stack. Trabajarás en proyectos emocionantes utilizando React y Java.",
-    isRemunerated: true,
-    dineroRemunera: "RD$ 30,000",
-    duracion: "6 meses",
-    idEmpresa: 1,
-    modalidadPasa: "Remoto",
-    requisitos: ["Conocimiento en React", "Experiencia con Java", "Habilidades de comunicación"],
-    area: "Desarrollo de Software",
-    estado: "Activa",
-    idBeneficios: [1, 2, 3],
-    rol: "Desarrollador",
-    company: "FullStack Labs",
-    location: "Santo Domingo, Distrito Nacional (Remoto)",
-    image: "https://via.placeholder.com/150x100"
-  },
-  2: {
-    id: 2,
-    title: "Frontend Developer Intern",
-    description: "Únete a nuestro equipo como desarrollador Frontend. Trabajarás en proyectos innovadores utilizando React.",
-    isRemunerated: true,
-    dineroRemunera: "RD$ 20,000",
-    duracion: "3 meses",
-    idEmpresa: 1,
-    modalidadPasa: "Remoto",
-    requisitos: ["Conocimiento en React", "Habilidades de comunicación"],
-    area: "Desarrollo de Software",
-    estado: "Activa",
-    idBeneficios: [1, 2],
-    rol: "Desarrollador Frontend",
-    company: "FullStack Labs",
-    location: "Santo Domingo, Distrito Nacional (Remoto)",
-    image: "https://via.placeholder.com/150x100"
-  },
-  3: {
-    id: 3,
-    title: "Frontend Developer Intern",
-    description: "Únete a nuestro equipo como desarrollador Frontend. Trabajarás en proyectos innovadores utilizando React.",
-    isRemunerated: true,
-    dineroRemunera: "RD$ 20,000",
-    duracion: "3 meses",
-    idEmpresa: 1,
-    modalidadPasa: "Remoto",
-    requisitos: ["Conocimiento en React", "Habilidades de comunicación"],
-    area: "Desarrollo de Software",
-    estado: "Activa",
-    idBeneficios: [1, 2],
-    rol: "Desarrollador Frontend",
-    company: "FullStack Labs",
-    location: "Santo Domingo, Distrito Nacional (Remoto)",
-    image: "https://via.placeholder.com/150x100"
-  },
-  // Añade más pasantías aquí...
-};
 
 export function EmpresaDetalle() {
   const { id } = useParams();
-  const empresa = empresasData[id];
+  const [empresa, setEmpresa] = useState(null);
+  const [pasantiasRelacionadas, setPasantiasRelacionadas] = useState([]);
+
+  useEffect(() => {
+    const fetchEmpresaAndPasantias = async () => {
+      try {
+        // Obtener detalles de la empresa
+        const empresaResponse = await axios.get(`https://localhost:7018/api/Empresas/${id}`);
+        setEmpresa(empresaResponse.data);
+
+        // Obtener todas las pasantías
+        const pasantiasResponse = await axios.get('https://localhost:7018/api/Pasantias');
+        
+        // Filtrar las pasantías relacionadas con esta empresa
+        const pasantiasFiltradas = pasantiasResponse.data.filter(
+          pasantia => pasantia.idEmpresa === parseInt(id)
+        );
+        setPasantiasRelacionadas(pasantiasFiltradas);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchEmpresaAndPasantias();
+  }, [id]);
 
   if (!empresa) {
-    return <div>Empresa no encontrada</div>;
+    return <div>Cargando...</div>;
   }
-
-  const pasantiasRelacionadas = Object.values(pasantiasData).filter(pasantia => pasantia.idEmpresa === parseInt(id));
 
   return (
     <div>
@@ -94,25 +44,31 @@ export function EmpresaDetalle() {
       <div className="empresa-detalle-container">
         <div className="empresa-detalle">
           <div className="empresa-info">
-            <h1 className="empresa-name">{empresa.name}</h1>
-            <h2 className="empresa-industry">{empresa.industry}</h2>
+            <h1 className="empresa-name">{empresa.nombre}</h1>
+            <h2 className="empresa-industry">{empresa.industria}</h2>
             <p><strong>Ubicación:</strong> {empresa.direccion}</p>
             <p><strong>Correo RRHH:</strong> {empresa.correoRRHH}</p>
-            <p><strong>Contacto:</strong> {empresa.contacto}</p>
+            <p><strong>Contacto:</strong> {empresa.telefono}</p>
             <h3>Descripción</h3>
-            <p className="empresa-description">{empresa.description}</p>
+            <p className="empresa-description">{empresa.descripcion}</p>
           </div>
           <div className="empresa-imagen">
-            <img src={empresa.logoEmpresa} alt={empresa.name} className="empresa-logo" />
-            <img src={empresa.image} alt={empresa.name} className="empresa-image" />
+            <img src={empresa.logoUrl} alt={empresa.nombre} className="empresa-logo" />
           </div>
         </div>
         <div className="pasantias-relacionadas">
           <h3>Pasantías Relacionadas</h3>
           <div className="internship-list">
             {pasantiasRelacionadas.length > 0 ? (
-              pasantiasRelacionadas.map((pasantia, index) => (
-                <PasantiaCard key={index} {...pasantia} />
+              pasantiasRelacionadas.map((pasantia) => (
+                <CartaPasantia
+                  key={pasantia.idPasantia}
+                  idPasantia={pasantia.idPasantia}
+                  titulo={pasantia.titulo}
+                  nombreEmpresa={empresa.nombre}
+                  modalidadPasa={pasantia.modalidadPasa}
+                  esRemuneracion={pasantia.esRemuneracion}
+                />
               ))
             ) : (
               <p>No hay pasantías relacionadas.</p>
