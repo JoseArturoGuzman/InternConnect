@@ -1,41 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 import "../Styles/StylesPages/PasantiaDetalles.css"
 
-const pasantiasData = {
-  1: {
-    title: "Full Stack React/Java Developer",
-    description: "Únete a nuestro equipo como desarrollador Full Stack. Trabajarás en proyectos emocionantes utilizando React y Java.",
-    isRemunerated: true,
-    dineroRemunera: "RD$ 30,000",
-    duracion: "6 meses",
-    idEmpresa: 1,
-    modalidadPasa: "Remoto",
-    requisitos: ["Conocimiento en React", "Experiencia con Java", "Habilidades de comunicación"],
-    area: "Desarrollo de Software",
-    estado: "Activa",
-    idBeneficios: [1, 2, 3],
-    rol: "Desarrollador",
-    company: "FullStack Labs",
-    location: "Santo Domingo, Distrito Nacional (Remoto)",
-    image: "https://via.placeholder.com/150x100"
-  },
-  // Añade más pasantías aquí...
-};
-
 export function PasantiaDetalle() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const pasantia = pasantiasData[id];
+  const [pasantia, setPasantia] = useState(null);
+  const [empresa, setEmpresa] = useState(null);
 
-  if (!pasantia) {
-    return <div>Pasantía no encontrada</div>;
+  useEffect(() => {
+    const fetchPasantiaAndCompany = async () => {
+      try {
+        const pasantiaResponse = await axios.get(`https://localhost:7018/api/Pasantias/${id}`);
+        setPasantia(pasantiaResponse.data);
+
+        const empresaResponse = await axios.get(`https://localhost:7018/api/Empresas/${pasantiaResponse.data.idEmpresa}`);
+        setEmpresa(empresaResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchPasantiaAndCompany();
+  }, [id]);
+
+  if (!pasantia || !empresa) {
+    return <div>Cargando...</div>;
   }
 
   const handleAplicar = () => {
-    // Redirigir a la página de login
     navigate('/login');
   };
 
@@ -49,26 +45,21 @@ export function PasantiaDetalle() {
       <div className="pasantia-detalle-container">
         <div className="pasantia-detalle">
           <div className="pasantia-info">
-            <h1 className="pasantia-title">{pasantia.title}</h1>
-            <h2 className="pasantia-company" onClick={handleEmpresaClick} style={{ cursor: 'pointer', color: 'blue' }}>{pasantia.company}</h2>
-            <p><strong>Ubicación:</strong> {pasantia.location}</p>
-            <p><strong>Remuneración:</strong> {pasantia.isRemunerated ? 'Remunerada' : 'No remunerada'}</p>
-            {pasantia.isRemunerated && <p><strong>Monto Remuneración:</strong> {pasantia.dineroRemunera}</p>}
-            <p><strong>Duración:</strong> {pasantia.duracion}</p>
+            <h1 className="pasantia-title">{pasantia.titulo}</h1>
+            <h2 className="pasantia-company" onClick={handleEmpresaClick} style={{ cursor: 'pointer', color: 'blue' }}>{empresa.nombre}</h2>
             <p><strong>Modalidad:</strong> {pasantia.modalidadPasa}</p>
+            <p><strong>Remuneración:</strong> {pasantia.esRemuneracion ? 'Remunerada' : 'No remunerada'}</p>
+            {pasantia.esRemuneracion && <p><strong>Monto Remuneración:</strong> {pasantia.dineroRemuneracion}</p>}
+            <p><strong>Duración:</strong> {pasantia.duracion} meses</p>
             <p><strong>Área:</strong> {pasantia.area}</p>
             <p><strong>Estado:</strong> {pasantia.estado}</p>
+            <p><strong>Rol:</strong> {pasantia.rol}</p>
             <h3>Descripción</h3>
-            <p className="pasantia-description">{pasantia.description}</p>
+            <p className="pasantia-description">{pasantia.descripcion}</p>
             <h3>Requisitos</h3>
-            <ul className="pasantia-requirements">
-              {pasantia.requisitos.map((req, index) => (
-                <li key={index}>{req}</li>
-              ))}
-            </ul>
+            <p>{pasantia.requisitos}</p>
           </div>
           <div className="pasantia-imagen-boton">
-            <img src={pasantia.image} alt={pasantia.title} className="pasantia-image" />
             <button onClick={handleAplicar} className="aplicar-button">Aplicar</button>
           </div>
         </div>

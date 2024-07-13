@@ -8,18 +8,29 @@ import PasantiaCard from "../Components/CartaPasantia";
 const InternshipList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [internships, setInternships] = useState([]);
+  const [companies, setCompanies] = useState({});
 
   useEffect(() => {
-    const fetchInternships = async () => {
+    const fetchInternshipsAndCompanies = async () => {
       try {
-        const response = await axios.get("https://localhost:7018/api/Pasantias");
-        setInternships(response.data);
+        const [internshipsResponse, companiesResponse] = await Promise.all([
+          axios.get("https://localhost:7018/api/Pasantias"),
+          axios.get("https://localhost:7018/api/Empresas")
+        ]);
+
+        const companiesMap = {};
+        companiesResponse.data.forEach(company => {
+          companiesMap[company.idEmpresa] = company.nombre;
+        });
+
+        setCompanies(companiesMap);
+        setInternships(internshipsResponse.data);
       } catch (error) {
-        console.error("Error fetching internships:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchInternships();
+    fetchInternshipsAndCompanies();
   }, []);
 
   const filteredInternships = internships.filter((internship) =>
@@ -38,7 +49,14 @@ const InternshipList = () => {
       />
       <div className="internship-list">
         {filteredInternships.map((internship) => (
-          <PasantiaCard key={internship.idPasantia} title={internship.titulo} company={internship.empresa} location={internship.location} isRemunerated={internship.esRemuneracion} />
+          <PasantiaCard
+            key={internship.idPasantia}
+            idPasantia={internship.idPasantia}
+            titulo={internship.titulo}
+            nombreEmpresa={companies[internship.idEmpresa] || 'Empresa desconocida'}
+            modalidadPasa={internship.modalidadPasa}
+            esRemuneracion={internship.esRemuneracion}
+          />
         ))}
       </div>
     </div>

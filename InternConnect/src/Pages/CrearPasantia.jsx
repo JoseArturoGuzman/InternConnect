@@ -18,7 +18,7 @@ export function CrearPasantia() {
     esRemuneracion: true,
     dineroRemuneracion: '',
     duracion: '',
-    idEmpresa: 1,
+    idEmpresa: 2,
     modalidadPasa: 'Virtual',
     requisitos: '',
     area: '',
