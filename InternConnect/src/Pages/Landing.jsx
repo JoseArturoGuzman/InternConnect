@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Header } from '../Components/Header.jsx';
 import { Footer } from '../Components/Footer.jsx';
 import CartaPasantia from '../Components/CartaPasantia.jsx';
@@ -6,37 +7,36 @@ import CartaEmpresa from '../Components/CartaEmpresa.jsx';
 import "../Styles/StylesPages/Landing.css";
 import BackgroundImage from "../Images/ImagenLanding.png";
 import { Link } from 'react-router-dom';
+
 export function Landing() {
   const [pasantias, setPasantias] = useState([]);
   const [empresas, setEmpresas] = useState([]);
+  const [companiesMap, setCompaniesMap] = useState({});
 
   useEffect(() => {
-    // Simular la obtención de datos de pasantías
-    const fetchPasantias = () => {
-      const pasantiasData = [
-        { id: 1, title: 'Full Stack React/Java Developer', company: 'FullStack Labs', location: 'Santo Domingo, Distrito Nacional (Remoto)', remunerated: true, image: 'https://via.placeholder.com/150x100' },
-        { id: 2, title: 'Frontend Developer', company: 'Microsoft', location: 'Santo Domingo, Distrito Nacional (Remoto)', remunerated: true, image: 'https://via.placeholder.com/150x100' },
-        { id: 3, title: 'DevOps Engineer', company: 'Shopify', location: 'Toronto, Canada (Remoto)', remunerated: false, image: 'https://via.placeholder.com/150x100' },
-        { id: 4, title: 'Desarrollador Web', company: 'Grupo Popular', location: 'Santo Domingo, Distrito Nacional', remunerated: true, image: 'https://via.placeholder.com/150x100' },
-        { id: 5, title: 'Analisis de Datos', company: 'Banco BHD Leon', location: 'Santo Domingo, Distrito Nacional', remunerated: true, image: 'https://via.placeholder.com/150x100' },
-      ];
-      setPasantias(pasantiasData);
+    const fetchData = async () => {
+      try {
+        const [pasantiasResponse, empresasResponse] = await Promise.all([
+          axios.get("https://localhost:7018/api/Pasantias"),
+          axios.get("https://localhost:7018/api/Empresas")
+        ]);
+
+        // Crear un mapa de empresas
+        const companiesMap = {};
+        empresasResponse.data.forEach(company => {
+          companiesMap[company.idEmpresa] = company.nombre;
+        });
+        setCompaniesMap(companiesMap);
+
+        // Establecer las pasantías y empresas
+        setPasantias(pasantiasResponse.data);
+        setEmpresas(empresasResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    // Simular la obtención de datos de empresas
-    const fetchEmpresas = () => {
-      const empresasData = [
-        { id: 1, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
-        { id: 2, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
-        { id: 3, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
-        { id: 4, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
-        { id: 5, name: 'FullStack Labs', location: 'Sacramento, California', image: 'https://via.placeholder.com/150x100' },
-      ];
-      setEmpresas(empresasData);
-    };
-
-    fetchPasantias();
-    fetchEmpresas();
+    fetchData();
   }, []);
 
   return (
@@ -53,8 +53,8 @@ export function Landing() {
         <section className="connect-talent">
           <p>Conecta tu talento con las mejores oportunidades de pasantía y da los primeros pasos hacia una carrera exitosa.</p>
           <div className="auth-buttons">
-          <Link to="/login" className="btn-iniciar-sesion">Iniciar sesión</Link>
-          <Link to="/registro" className="btn-registrarse">Registrarse</Link>
+            <Link to="/login" className="btn-iniciar-sesion">Iniciar sesión</Link>
+            <Link to="/registro" className="btn-registrarse">Registrarse</Link>
           </div>
         </section>
 
@@ -62,7 +62,14 @@ export function Landing() {
           <h2>Nuestras últimas pasantías:</h2>
           <div className="pasantias-list">
             {pasantias.slice(0, 5).map(pasantia => (
-              <CartaPasantia key={pasantia.id} {...pasantia} />
+              <CartaPasantia
+                key={pasantia.idPasantia}
+                idPasantia={pasantia.idPasantia}
+                titulo={pasantia.titulo}
+                nombreEmpresa={companiesMap[pasantia.idEmpresa] || 'Empresa desconocida'}
+                modalidadPasa={pasantia.modalidadPasa}
+                esRemuneracion={pasantia.esRemuneracion}
+              />
             ))}
           </div>
         </section>
@@ -70,8 +77,14 @@ export function Landing() {
         <section className="empresas-asociadas">
           <h2>Nuestras principales empresas asociadas:</h2>
           <div className="empresas-list">
-            {empresas.map(empresa => (
-              <CartaEmpresa key={empresa.id} {...empresa} />
+            {empresas.slice(0, 5).map(empresa => (
+              <CartaEmpresa
+                key={empresa.idEmpresa}
+                id={empresa.idEmpresa}
+                name={empresa.nombre}
+                location={empresa.direccion}
+                image={empresa.logoUrl}
+              />
             ))}
           </div>
         </section>

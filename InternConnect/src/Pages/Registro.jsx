@@ -1,84 +1,111 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../Components/authContext";
+import axios from 'axios';
 import estudianteImg from '../Images/Estudiante.jpg';
 import empresaImg from '../Images/Empresa.jpg';
 import logouni from '../Images/NewLogo.png';
 import '../Styles/StylesPages/RegistroEmpresa.css';
 
 export function Registro() {
-  const { registerUser } = useAuth();
   const navigate = useNavigate();
 
+  // Estado para manejar datos del formulario
   const [tipoUsuario, setTipoUsuario] = useState('estudiante');
   const [nombre, setNombre] = useState('');
   const [rnc, setRnc] = useState('');
-  const [institucion, setInstitucion] = useState('');
-  const [tipoDocumento, setTipoDocumento] = useState('');
+  const [idUniversidad, setIdUniversidad] = useState('');
+  const [idCarrera, setIdCarrera] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [tipoDocumentoId, setTipoDocumentoId] = useState('');
   const [documentoIdentidad, setDocumentoIdentidad] = useState('');
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [confirmarContraseña, setConfirmarContraseña] = useState('');
-  const [errorContraseña, setErrorContraseña] = useState(null);
-  const [errorCorreo, setErrorCorreo] = useState(null);
+  const [errors, setErrors] = useState({});
 
-  const formatCedula = (value) => {
-    const cleaned = value.replace(/\D/g, '');
-    let formatted = '';
-    for (let i = 0; i < cleaned.length && i < 11; i++) {
-      if (i === 3 || i === 10) {
-        formatted += '-';
+  // Estados para almacenar datos obtenidos del servidor
+  const [universidades, setUniversidades] = useState([]);
+  const [carreras, setCarreras] = useState([]);
+  const [tiposDocumento, setTiposDocumento] = useState([]);
+
+  // Obtener datos del servidor al cargar el componente
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [univRes, carrerasRes, tiposDocRes] = await Promise.all([
+          axios.get('https://localhost:7018/api/Universidad'),
+          axios.get('https://localhost:7018/api/Carreras'),
+          axios.get('https://localhost:7018/api/TipoDocumento')
+        ]);
+        setUniversidades(univRes.data);
+        setCarreras(carrerasRes.data);
+        setTiposDocumento(tiposDocRes.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-      formatted += cleaned[i];
-    }
-    return formatted;
-  };
+    };
+    fetchData();
+  }, []);
 
+  // Manejar cambios en el campo de documento de identidad
   const handleDocumentoIdentidadChange = (event) => {
-    const formattedValue = formatCedula(event.target.value);
-    setDocumentoIdentidad(formattedValue);
+    setDocumentoIdentidad(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  // Validar el formulario antes de enviarlo
+  const validateForm = () => {
+    const newErrors = {};
+    if (!nombre) newErrors.nombre = 'El nombre es obligatorio';
+    if (tipoUsuario === 'empresa' && !rnc) newErrors.rnc = 'El RNC es obligatorio';
+    if (tipoUsuario === 'estudiante') {
+      if (!idUniversidad) newErrors.idUniversidad = 'La universidad es obligatoria';
+      if (!idCarrera) newErrors.idCarrera = 'La carrera es obligatoria';
+      if (!tipoDocumentoId) newErrors.tipoDocumentoId = 'El tipo de documento es obligatorio';
+      if (!documentoIdentidad) newErrors.documentoIdentidad = 'El documento de identidad es obligatorio';
+    }
+    if (!correo) newErrors.correo = 'El correo es obligatorio';
+    if (!contraseña) newErrors.contraseña = 'La contraseña es obligatoria';
+    if (!confirmarContraseña) newErrors.confirmarContraseña = 'La confirmación de la contraseña es obligatoria';
+    if (contraseña && contraseña.length < 8) newErrors.contraseña = 'La contraseña debe tener al menos 8 caracteres';
+    if (contraseña && confirmarContraseña && contraseña !== confirmarContraseña) newErrors.confirmarContraseña = 'Las contraseñas no coinciden';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Manejar envío del formulario
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!correo.includes('@')) {
-      setErrorCorreo('El correo electrónico no es válido');
-      return;
-    } else {
-      setErrorCorreo(null);
-    }
+    if (validateForm()) {
+      try {
+        let userData;
+        if (tipoUsuario === 'estudiante') {
+          userData = {
+            nombre,
+            correo,
+            idUniversidad: parseInt(idUniversidad),
+            idCarrera: parseInt(idCarrera),
+            direccion: direccion || "No especificada",
+            telefono: telefono || "No especificado",
+            tipoDocumento: parseInt(tipoDocumentoId),
+            documento: documentoIdentidad,
+            contraseñaHash: contraseña
+          };
 
-    if (contraseña.length < 8) {
-      setErrorContraseña('La contraseña debe tener al menos 8 caracteres');
-      return;
-    } else if (contraseña !== confirmarContraseña) {
-      setErrorContraseña('Las contraseñas no coinciden');
-      return;
-    } else {
-      setErrorContraseña(null);
-    }
+          console.log("Campos enviados en el POST:", userData);
 
-    const userData = {
-      nombre,
-      email: correo,
-      password: contraseña,
-      tipoUsuario,
-      rnc: tipoUsuario === 'empresa' ? rnc : undefined,
-      institucion: tipoUsuario === 'estudiante' ? institucion : undefined,
-      tipoDocumento: tipoUsuario === 'estudiante' ? tipoDocumento : undefined,
-      documentoIdentidad: tipoUsuario === 'estudiante' ? documentoIdentidad : undefined,
-    };
-
-    const newUser = registerUser(userData);
-    if (newUser) {
-      if (newUser.tipoUsuario === 'estudiante') {
-        navigate('/PerfilEstudiante');
-      } else if (newUser.tipoUsuario === 'empresa') {
-        navigate('/PerfilEmpresa');
+          const response = await axios.post('https://localhost:7018/api/Estudiantes/Register', userData);
+          console.log("Registro exitoso:", response.data);
+          navigate('/PerfilEstudiante');
+        } else {
+          console.log("Registro de empresa no implementado");
+        }
+      } catch (error) {
+        console.error("Error en el registro:", error);
+        setErrors({ general: 'Error al registrar el usuario' });
       }
-    } else {
-      setErrorCorreo('Error al registrar el usuario');
     }
   };
 
@@ -111,6 +138,7 @@ export function Registro() {
             onChange={(e) => setNombre(e.target.value)}
             required
           />
+          {errors.nombre && <div style={{ color: 'red' }}>{errors.nombre}</div>}
         </div>
         {tipoUsuario === 'empresa' && (
           <div className="form-group">
@@ -122,61 +150,91 @@ export function Registro() {
               onChange={(e) => setRnc(e.target.value)}
               required
             />
+            {errors.rnc && <div style={{ color: 'red' }}>{errors.rnc}</div>}
           </div>
         )}
         {tipoUsuario === 'estudiante' && (
           <>
             <div className="form-group">
-              <label htmlFor="institucion">Institución:</label>
+              <label htmlFor="idUniversidad">Universidad:</label>
               <select
-                id="institucion"
-                value={institucion}
-                onChange={(e) => setInstitucion(e.target.value)}
+                id="idUniversidad"
+                value={idUniversidad}
+                onChange={(e) => setIdUniversidad(e.target.value)}
                 required
               >
-                <option value="">Selecciona una institución</option>
-                <option value="Intec">Intec</option>
-                <option value="Unibe">Unibe</option>
+                <option value="">Selecciona una universidad</option>
+                {universidades.map(univ => (
+                  <option key={univ.idUniversidad} value={univ.idUniversidad}>
+                    {univ.nombre}
+                  </option>
+                ))}
               </select>
+              {errors.idUniversidad && <div style={{ color: 'red' }}>{errors.idUniversidad}</div>}
             </div>
             <div className="form-group">
-              <label htmlFor="tipoDocumento">Tipo de Documento:</label>
+              <label htmlFor="idCarrera">Carrera:</label>
               <select
-                id="tipoDocumento"
-                value={tipoDocumento}
-                onChange={(e) => setTipoDocumento(e.target.value)}
+                id="idCarrera"
+                value={idCarrera}
+                onChange={(e) => setIdCarrera(e.target.value)}
+                required
+              >
+                <option value="">Selecciona una carrera</option>
+                {carreras.map(carrera => (
+                  <option key={carrera.idCarrera} value={carrera.idCarrera}>
+                    {carrera.nombre}
+                  </option>
+                ))}
+              </select>
+              {errors.idCarrera && <div style={{ color: 'red' }}>{errors.idCarrera}</div>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="direccion">Dirección:</label>
+              <input
+                type="text"
+                id="direccion"
+                value={direccion}
+                onChange={(e) => setDireccion(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="telefono">Teléfono:</label>
+              <input
+                type="text"
+                id="telefono"
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="tipoDocumentoId">Tipo de Documento:</label>
+              <select
+                id="tipoDocumentoId"
+                value={tipoDocumentoId}
+                onChange={(e) => setTipoDocumentoId(e.target.value)}
                 required
               >
                 <option value="">Selecciona un tipo de documento</option>
-                <option value="cedula">Cédula</option>
-                <option value="pasaporte">Pasaporte</option>
+                {tiposDocumento.map(tipo => (
+                  <option key={tipo.tipoDocumentoId} value={tipo.tipoDocumentoId}>
+                    {tipo.nombreTipoDocumento}
+                  </option>
+                ))}
               </select>
+              {errors.tipoDocumentoId && <div style={{ color: 'red' }}>{errors.tipoDocumentoId}</div>}
             </div>
-            {tipoDocumento === 'cedula' && (
-              <div className="form-group">
-                <label htmlFor="documentoIdentidad">Documento de Identidad:</label>
-                <input
-                  type="text"
-                  id="documentoIdentidad"
-                  value={documentoIdentidad}
-                  onChange={handleDocumentoIdentidadChange}
-                  maxLength={13}
-                  required
-                />
-              </div>
-            )}
-            {tipoDocumento === 'pasaporte' && (
-              <div className="form-group">
-                <label htmlFor="documentoIdentidad">Número de Pasaporte:</label>
-                <input
-                  type="text"
-                  id="documentoIdentidad"
-                  value={documentoIdentidad}
-                  onChange={(e) => setDocumentoIdentidad(e.target.value)}
-                  required
-                />
-              </div>
-            )}
+            <div className="form-group">
+              <label htmlFor="documentoIdentidad">Documento de Identidad:</label>
+              <input
+                type="text"
+                id="documentoIdentidad"
+                value={documentoIdentidad}
+                onChange={handleDocumentoIdentidadChange}
+                required
+              />
+              {errors.documentoIdentidad && <div style={{ color: 'red' }}>{errors.documentoIdentidad}</div>}
+            </div>
           </>
         )}
         <div className="form-group">
@@ -188,7 +246,7 @@ export function Registro() {
             onChange={(e) => setCorreo(e.target.value)}
             required
           />
-          {errorCorreo && <div style={{ color: 'red' }}>{errorCorreo}</div>}
+          {errors.correo && <div style={{ color: 'red' }}>{errors.correo}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="contraseña">Contraseña:</label>
@@ -199,7 +257,7 @@ export function Registro() {
             onChange={(e) => setContraseña(e.target.value)}
             required
           />
-          {errorContraseña && <div style={{ color: 'red' }}>{errorContraseña}</div>}
+          {errors.contraseña && <div style={{ color: 'red' }}>{errors.contraseña}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="confirmarContraseña">Confirmar Contraseña:</label>
@@ -210,9 +268,18 @@ export function Registro() {
             onChange={(e) => setConfirmarContraseña(e.target.value)}
             required
           />
+          {errors.confirmarContraseña && <div style={{ color: 'red' }}>{errors.confirmarContraseña}</div>}
         </div>
-        <button type="submit" className="submit-button">Registrar</button>
+        {errors.general && <div style={{ color: 'red' }}>{errors.general}</div>}
+        <div className="form-group">
+          <button type="submit">Registrarse</button>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          ¿Ya tienes una cuenta? <a href="/Login">Inicia sesión aquí</a>
+        </div>
       </form>
     </div>
   );
 }
+
+export default Registro;
