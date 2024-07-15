@@ -1,59 +1,60 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+  import React, { createContext, useContext, useState } from 'react';
+  import axios from 'axios';
 
-const AuthContext = createContext();
+  export const AuthContext = createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-
-  // Simula una base de datos de usuarios
-  const [users, setUsers] = useState([
-    { email: 'estudiante@ejemplo.com', password: 'password123', tipoUsuario: 'estudiante' },
-    { email: 'empresa@ejemplo.com', password: 'password456', tipoUsuario: 'empresa' }
-  ]);
-
-  function loginUser(email, password) {
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-      setCurrentUser(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return user;
-    }
-    return null;
+  export function useAuth() {
+    return useContext(AuthContext);
   }
 
-  function registerUser(userData) {
-    setUsers([...users, userData]);
-    setCurrentUser(userData);
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-    return userData;
+  export function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
+
+    const loginUser = async (email, password) => {
+      try {
+        const response = await axios.post('https://localhost:7018/api/Estudiantes/Login', {
+          correo: email,
+          contraseña: password
+        });
+        const userData = { ...response.data, tipo: 'estudiante' };
+        setUser(userData);
+        return userData;
+      } catch (error) {
+        console.error('Error en el login de estudiantes:', error);
+        throw error;
+      }
+    };
+
+    const loginEmpresa = async (email, password) => {
+      try {
+        const response = await axios.post('https://localhost:7018/api/Empresas/Login', {
+          Correo: email,
+          ContraseñaHash: password
+        });
+        console.log('Respuesta del servidor (empresa):', response.data);
+        const userData = { ...response.data, tipo: 'empresa' };
+        setUser(userData);
+        return userData;
+      } catch (error) {
+        console.error('Error en el login de empresas:', error.response?.data || error.message);
+        throw error;
+      }
+    };
+
+    const logout = () => {
+      setUser(null);
+    };
+
+    const value = {
+      user,
+      loginUser,
+      loginEmpresa,
+      logout
+    };
+
+    return (
+      <AuthContext.Provider value={value}>
+        {children}
+      </AuthContext.Provider>
+    );
   }
-
-  function logoutUser() {
-    setCurrentUser(null);
-    localStorage.removeItem('currentUser');
-  }
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  const value = {
-    currentUser,
-    loginUser,
-    registerUser,
-    logoutUser
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
-}

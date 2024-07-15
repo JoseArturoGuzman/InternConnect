@@ -76,7 +76,15 @@ const router = createBrowserRouter([
 {
   path:"/Pasantes",
   element:<Pasante/>
-}
+},
+{
+  path:"/editar-pasantia/:id",
+  element:<EditarPasantia/>
+},
+{
+  path:"/perfil-completo/:idEstudiante/:idPasantia",
+  element:<PerfilCompletoEstudiante/>
+},
 
 
 ]);
@@ -84,6 +92,8 @@ import './index.css'
 import { PerfilEstudiantes } from './Pages/PerfilEstudiante.jsx';
 import { PerfilEmpresa } from './Pages/PerfilEmpresa.jsx';
 import Pasante from './Pages/Pasantes.jsx';
+import { EditarPasantia } from './Pages/EditarPasantia.jsx';
+import {PerfilCompletoEstudiante} from "./Pages/PerfilCompletoEstudiante.jsx"
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

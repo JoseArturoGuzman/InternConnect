@@ -39,6 +39,11 @@ export function Landing() {
     fetchData();
   }, []);
 
+  // Función para construir la URL del logo
+  const getLogoUrl = (logoFileName) => {
+    return logoFileName ? `https://localhost:7018/uploads/${logoFileName}` : null;
+  };
+
   return (
     <div className="page-container">
       <Header />
@@ -83,7 +88,7 @@ export function Landing() {
                 id={empresa.idEmpresa}
                 name={empresa.nombre}
                 location={empresa.direccion}
-                image={empresa.logoUrl}
+                image={getLogoUrl(empresa.logoEmpresa)}
               />
             ))}
           </div>

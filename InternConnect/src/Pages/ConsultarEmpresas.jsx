@@ -1,56 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "../Components/Header";
-import { Link } from "react-router-dom";
 import { Footer } from "../Components/Footer";
+import axios from "axios";
+import CartaEmpresa from "../Components/CartaEmpresa";
 import "../Styles/StylesPages/ConsultarEmpresas.css";
 
-const CompanyCard = ({ name, description, industry, id, image }) => {
-  return (
-    <Link to={`/empresa/${id}`}>
-      <div className="company-card">
-        <div className="company-card-header">
-          <img src={image} alt={name} className="company-card-image" />
-          <h3>{name}</h3>
-        </div>
-        <div className="company-card-body">
-          <p className="company-card-description">{description}</p>
-          <p className="company-card-industry">{industry}</p>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
 const CompanyList = () => {
+  const [companies, setCompanies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const companies = [
-    {
-      id: 1,
-      name: 'FullStack Labs',
-      description: 'Desarrollo de software y servicios de tecnología',
-      industry: 'Tecnología',
-      image: 'https://via.placeholder.com/150x100',
-    },
-    {
-      id: 2,
-      name: 'Google',
-      description: 'Servicios de búsqueda y publicidad en línea',
-      industry: 'Tecnología',
-      image: 'https://via.placeholder.com/150x100',
-    },
-    {
-      id: 3,
-      name: 'Microsoft',
-      description: 'Desarrollo de software y servicios de tecnología',
-      industry: 'Tecnología',
-      image: 'https://via.placeholder.com/150x100',
-    },
-    // Añade más empresas aquí...
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const empresasResponse = await axios.get("https://localhost:7018/api/Empresas");
+        setCompanies(empresasResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const filteredCompanies = companies.filter((company) =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase())
+    fetchData();
+  }, []);
+
+  const filteredCompanies = companies.filter(
+    (company) =>
+      company.nombre &&
+      company.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -63,8 +38,14 @@ const CompanyList = () => {
         className="search-input"
       />
       <div className="company-list">
-        {filteredCompanies.map((company, index) => (
-          <CompanyCard key={index} {...company} />
+        {filteredCompanies.map((company) => (
+          <CartaEmpresa
+            key={company.idEmpresa}
+            id={company.idEmpresa}
+            name={company.nombre}
+            location={company.direccion}
+            image={`https://localhost:7018/uploads/${company.logoEmpresa}`}
+          />
         ))}
       </div>
     </div>

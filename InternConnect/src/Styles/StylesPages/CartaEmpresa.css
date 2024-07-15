@@ -1,81 +1,96 @@
 .empresa-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
-    padding: 25px;
-    max-width: 1600px;
-    margin: 0 auto;
-  }
-  
-  .empresa-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación agregada */
-    overflow: hidden;
-  }
-  
-  .empresa-card:hover {
-    transform: translateY(-5px); /* Transformación al hacer hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra aumentada al hacer hover */
-  }
-  
-  .empresa-card-image {
-    width: 100%;
-    height: 180px;
-    object-fit: contain;
-    background-color: #f0f0f0;
-  }
-  
-  .empresa-card-content {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  
-  .empresa-card h3 {
-    margin: 0 0 12px 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .empresa-card-location {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 12px 0;
-  }
-  
-  @media (max-width: 1400px) {
-    .empresa-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+  padding: 25px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.empresa-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 280px; /* Altura fija para todas las cartas */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+}
+
+.empresa-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.empresa-card-image {
+  width: 100%;
+  height: 180px; /* Altura fija para todas las imágenes */
+  object-fit:cover; /* Cambiado a 'cover' para llenar el espacio */
+  background-color: #f0f0f0;
+}
+
+.empresa-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.empresa-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empresa-card-location {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1400px) {
+  .empresa-list {
       grid-template-columns: repeat(4, 1fr);
-    }
   }
-  
-  @media (max-width: 1100px) {
-    .empresa-list {
+}
+
+@media (max-width: 1100px) {
+  .empresa-list {
       grid-template-columns: repeat(3, 1fr);
-    }
   }
-  
-  @media (max-width: 800px) {
-    .empresa-list {
+}
+
+@media (max-width: 800px) {
+  .empresa-list {
       grid-template-columns: repeat(2, 1fr);
-    }
   }
-  
-  @media (max-width: 500px) {
-    .empresa-list {
+}
+
+@media (max-width: 500px) {
+  .empresa-list {
       grid-template-columns: 1fr;
-    }
-  
-    .empresa-card h3 {
-      font-size: 1.4em;
-    }
-  
-    .empresa-card-location {
-      font-size: 1.1em;
-    }
   }
-  
+
+  .empresa-card {
+      height: auto; /* Permite que la altura se ajuste en móviles */
+      max-height: 300px; /* Limita la altura máxima en móviles */
+  }
+
+  .empresa-card h3 {
+      font-size: 1.2em;
+  }
+
+  .empresa-card-location {
+      font-size: 1em;
+  }
+}

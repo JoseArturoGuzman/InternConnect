@@ -1,0 +1,82 @@
+/* ActualizarPasantia.css */
+
+.actualizar-pasantia-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .actualizar-pasantia-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .actualizar-pasantia-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .actualizar-pasantia-form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .actualizar-pasantia-form input,
+  .actualizar-pasantia-form select,
+  .actualizar-pasantia-form textarea {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: calc(100% - 16px); /* Adjusted width */
+  }
+  
+  .actualizar-pasantia-form textarea {
+    height: 100px;
+  }
+  
+  .actualizar-pasantia-form button {
+    padding: 12px 20px;
+    background-color: #4caf50; /* Green button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .actualizar-pasantia-form button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .success-message {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 20px;
+    animation: fadeOut 2s ease-in-out forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .wide-textarea {
+    width: calc(100% - 16px); /* Adjusted width */
+  }
+  

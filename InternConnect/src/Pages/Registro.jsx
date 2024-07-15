@@ -77,7 +77,7 @@ export function Registro() {
   // Manejar envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (validateForm()) {
       try {
         let userData;
@@ -89,25 +89,36 @@ export function Registro() {
             idCarrera: parseInt(idCarrera),
             direccion: direccion || "No especificada",
             telefono: telefono || "No especificado",
-            tipoDocumento: parseInt(tipoDocumentoId),
-            documento: documentoIdentidad,
-            contraseñaHash: contraseña
+            tipoDocumentoId: parseInt(tipoDocumentoId),
+            documentoIdentidad,
+            contraseñaHash: contraseña, // Usar la variable de estado correcta
+            rol: 'estudiante' // Definir el rol correctamente
           };
-
-          console.log("Campos enviados en el POST:", userData);
-
+  
           const response = await axios.post('https://localhost:7018/api/Estudiantes/Register', userData);
-          console.log("Registro exitoso:", response.data);
+          console.log("Registro de estudiante exitoso:", response.data);
           navigate('/PerfilEstudiante');
-        } else {
-          console.log("Registro de empresa no implementado");
+        } else if (tipoUsuario === 'empresa') {
+          userData = {
+            nombre,
+            rnc,
+            correo,
+            direccion: direccion || "No especificada",
+            contraseñaHash: contraseña, // Usar la variable de estado correcta
+            descripcion: "Una empresa excelente",
+          };
+  
+          const response = await axios.post('https://localhost:7018/api/Empresas/Register', userData);
+          console.log("Registro de empresa exitoso:", response.data);
+          navigate('/PerfilEmpresa');
         }
       } catch (error) {
         console.error("Error en el registro:", error);
-        setErrors({ general: 'Error al registrar el usuario' });
+        setErrors({ general: error.response?.data?.message || 'Error al registrar el usuario' });
       }
     }
   };
+  
 
   return (
     <div className="registro-container">
@@ -270,13 +281,10 @@ export function Registro() {
           />
           {errors.confirmarContraseña && <div style={{ color: 'red' }}>{errors.confirmarContraseña}</div>}
         </div>
-        {errors.general && <div style={{ color: 'red' }}>{errors.general}</div>}
         <div className="form-group">
           <button type="submit">Registrarse</button>
         </div>
-        <div style={{ textAlign: 'center' }}>
-          ¿Ya tienes una cuenta? <a href="/Login">Inicia sesión aquí</a>
-        </div>
+        {errors.general && <div style={{ color: 'red' }}>{errors.general}</div>}
       </form>
     </div>
   );

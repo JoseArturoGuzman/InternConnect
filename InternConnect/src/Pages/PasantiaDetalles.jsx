@@ -10,24 +10,28 @@ export function PasantiaDetalle() {
   const navigate = useNavigate();
   const [pasantia, setPasantia] = useState(null);
   const [empresa, setEmpresa] = useState(null);
+  const [beneficio, setBeneficio] = useState(null);
 
   useEffect(() => {
-    const fetchPasantiaAndCompany = async () => {
+    const fetchPasantiaAndCompanyAndBenefit = async () => {
       try {
         const pasantiaResponse = await axios.get(`https://localhost:7018/api/Pasantias/${id}`);
         setPasantia(pasantiaResponse.data);
 
         const empresaResponse = await axios.get(`https://localhost:7018/api/Empresas/${pasantiaResponse.data.idEmpresa}`);
         setEmpresa(empresaResponse.data);
+
+        const beneficioResponse = await axios.get(`https://localhost:7018/api/Beneficios/${pasantiaResponse.data.idBeneficios}`);
+        setBeneficio(beneficioResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchPasantiaAndCompany();
+    fetchPasantiaAndCompanyAndBenefit();
   }, [id]);
 
-  if (!pasantia || !empresa) {
+  if (!pasantia || !empresa || !beneficio) {
     return <div>Cargando...</div>;
   }
 
@@ -58,6 +62,9 @@ export function PasantiaDetalle() {
             <p className="pasantia-description">{pasantia.descripcion}</p>
             <h3>Requisitos</h3>
             <p>{pasantia.requisitos}</p>
+            <h3>Beneficio</h3>
+            <p> {beneficio.tipoBeneficios}</p>
+            <p><strong>Descripción del beneficio:</strong> {beneficio.descripcion}</p>
           </div>
           <div className="pasantia-imagen-boton">
             <button onClick={handleAplicar} className="aplicar-button">Aplicar</button>

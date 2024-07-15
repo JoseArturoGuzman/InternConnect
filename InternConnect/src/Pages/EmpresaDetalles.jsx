@@ -10,18 +10,16 @@ export function EmpresaDetalle() {
   const { id } = useParams();
   const [empresa, setEmpresa] = useState(null);
   const [pasantiasRelacionadas, setPasantiasRelacionadas] = useState([]);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const fetchEmpresaAndPasantias = async () => {
       try {
-        // Obtener detalles de la empresa
         const empresaResponse = await axios.get(`https://localhost:7018/api/Empresas/${id}`);
         setEmpresa(empresaResponse.data);
 
-        // Obtener todas las pasantías
         const pasantiasResponse = await axios.get('https://localhost:7018/api/Pasantias');
-        
-        // Filtrar las pasantías relacionadas con esta empresa
         const pasantiasFiltradas = pasantiasResponse.data.filter(
           pasantia => pasantia.idEmpresa === parseInt(id)
         );
@@ -34,9 +32,22 @@ export function EmpresaDetalle() {
     fetchEmpresaAndPasantias();
   }, [id]);
 
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+  };
+
   if (!empresa) {
     return <div>Cargando...</div>;
   }
+
+  const logoUrl = empresa.logoEmpresa 
+    ? `https://localhost:7018/uploads/${empresa.logoEmpresa}`
+    : null;
 
   return (
     <div>
@@ -53,7 +64,21 @@ export function EmpresaDetalle() {
             <p className="empresa-description">{empresa.descripcion}</p>
           </div>
           <div className="empresa-imagen">
-            <img src={empresa.logoUrl} alt={empresa.nombre} className="empresa-logo" />
+            {imageLoading && <div className="image-loading">Cargando imagen...</div>}
+            {imageError ? (
+              <div className="image-error">Error al cargar la imagen</div>
+            ) : logoUrl ? (
+              <img 
+                src={logoUrl}
+                alt={empresa.nombre} 
+                className="empresa-logo"
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                style={{display: imageLoading ? 'none' : 'block'}}
+              />
+            ) : (
+              <div className="image-error">No hay logo disponible</div>
+            )}
           </div>
         </div>
         <div className="pasantias-relacionadas">
@@ -79,4 +104,4 @@ export function EmpresaDetalle() {
       <Footer />
     </div>
   );
-}
+} 

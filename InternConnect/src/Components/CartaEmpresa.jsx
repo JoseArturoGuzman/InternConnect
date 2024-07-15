@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "../Styles/StylesPages/CartaEmpresa.css"; // Verifica esta ruta
+import "../Styles/StylesPages/CartaEmpresa.css";
 
 const CartaEmpresa = ({ id, name, location, image }) => {
   return (
